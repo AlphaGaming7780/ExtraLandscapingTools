@@ -8,6 +8,8 @@ using Unity.Collections;
 using Game.Prefabs;
 using System;
 using ExtraLib.Helper;
+using ExtraLib.Debugger;
+using System.Drawing.Printing;
 
 namespace ExtraLandscapingTools
 {
@@ -38,6 +40,7 @@ namespace ExtraLandscapingTools
 
 		public void OnEditEntities(NativeArray<Entity> entities)
 		{   
+			Print.Info("Let's go");
 			foreach(Entity entity in entities) {
 				if(ExtraLib.ExtraLib.m_PrefabSystem.TryGetPrefab<TerraformingPrefab>(entity, out TerraformingPrefab prefab)) {
 					var TerraformingUI = prefab.GetComponent<UIObject>();
