@@ -2,14 +2,12 @@
 using Game;
 using Game.Modding;
 using Game.SceneFlow;
-using ExtraLib;
 using Unity.Entities;
 using Unity.Collections;
 using Game.Prefabs;
-using System;
-using ExtraLib.Helper;
-using ExtraLib.Debugger;
-using System.Drawing.Printing;
+using Extra.Lib;
+using Extra.Lib.Debugger;
+using Extra.Lib.Helper;
 
 namespace ExtraLandscapingTools
 {
@@ -29,7 +27,7 @@ namespace ExtraLandscapingTools
 				All = [ComponentType.ReadOnly<TerraformingData>()]
 			};
 
-			ExtraLib.ExtraLib.AddOnEditEnity(new(OnEditEntities, entityQueryDesc));
+			ExtraLib.AddOnEditEnity(new(OnEditEntities, entityQueryDesc));
 
 		}
 
@@ -40,9 +38,8 @@ namespace ExtraLandscapingTools
 
 		public void OnEditEntities(NativeArray<Entity> entities)
 		{   
-			Print.Info("Let's go");
 			foreach(Entity entity in entities) {
-				if(ExtraLib.ExtraLib.m_PrefabSystem.TryGetPrefab<TerraformingPrefab>(entity, out TerraformingPrefab prefab)) {
+				if(ExtraLib.m_PrefabSystem.TryGetPrefab(entity, out TerraformingPrefab prefab)) {
 					var TerraformingUI = prefab.GetComponent<UIObject>();
 					if (TerraformingUI == null)
 					{
@@ -52,7 +49,16 @@ namespace ExtraLandscapingTools
 						TerraformingUI.m_Icon = "Media/Game/Icons/LotTool.svg";
 						TerraformingUI.m_Priority = 1;
 					}
-					TerraformingUI.m_Group = PrefabsHelper.GetExistingToolCategory(prefab, "Terraforming") ?? TerraformingUI.m_Group;
+
+					TerraformingUI.m_Group?.RemoveElement(entity);
+					TerraformingUI.m_Group = PrefabsHelper.GetExistingToolCategory("Terraforming");
+					TerraformingUI.m_Group.AddElement(ExtraLib.m_EntityManager, entity);
+
+					ExtraLib.m_EntityManager.SetComponentData(entity, new UIObjectData
+					{
+						m_Group = ExtraLib.m_PrefabSystem.GetEntity(TerraformingUI.m_Group),
+						m_Priority = TerraformingUI.m_Priority
+					});
 				}
 			}
 		}
