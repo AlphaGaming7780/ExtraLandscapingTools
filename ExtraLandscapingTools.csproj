@@ -4,11 +4,14 @@
 		<OutputType>Library</OutputType>
 		<TargetFramework>net472</TargetFramework>
 		<Configurations>Debug;Release</Configurations>
-    	<langVersion>latest</langVersion>
+		<langVersion>latest</langVersion>
 		
 		<!--The folder where Game.dll is located. Set it only if the game is not installed in the default location, otherwise keep it empty-->
 		<CustomManagedPath>E:\SteamLibrary\steamapps\common\Cities Skylines II\Cities2_Data\Managed</CustomManagedPath>
-		
+		<CustomManagedPath>C:\Program Files (x86)\Steam\steamapps\common\Cities Skylines II\Cities2_Data\Managed</CustomManagedPath>
+
+    	<AdditionalFilesDirectory>Resources</AdditionalFilesDirectory>
+    
 		<!--Path to the text file where PDX account data is stored which is required to publish the mod-->
 		<!--Keep it outside of project in order to not commit it or share accidentally-->
 		<!--The file should contain 2 lines:-->
@@ -19,7 +22,7 @@
 		<!--The file where mod information which is required for publishing mod on PDX mods are stored-->
 		<PublishConfigurationPath>Properties\PublishConfiguration.xml</PublishConfigurationPath>
 	</PropertyGroup>
-	
+  
 	<ItemGroup>
 		<EmbeddedResource Include="embedded\UI\UI.js"></EmbeddedResource>
 		<EmbeddedResource Include="embedded\UI\REMOVE_UI.js"></EmbeddedResource>
@@ -29,14 +32,14 @@
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.props" />
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.targets" />
 
-    <ItemGroup>
+	<ItemGroup>
 		<Reference Include="$(CustomManagedPath)\Colossal.*.dll" Private="False" />
 		<Reference Include="$(CustomManagedPath)\Game*.dll" Private="False" />
 		<Reference Include="$(CustomManagedPath)\Unity.*.dll" Private="False" />
 		<Reference Include="$(CustomManagedPath)\cohtml.Net.dll" Private="False" />
 		<Reference Include="$(LocalModsPath)\ExtraLib\ExtraLib.dll" Private="False" />
-  	</ItemGroup>
-  
+	</ItemGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="Lib.Harmony" Version="2.2.2" />
 		<PackageReference Include="UnityEngine.Modules" Version="2022.3.7" IncludeAssets="compile" />
