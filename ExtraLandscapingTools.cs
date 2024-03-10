@@ -8,13 +8,18 @@ using Game.Prefabs;
 using Extra.Lib;
 using Extra.Lib.Debugger;
 using Extra.Lib.Helper;
+using System.Linq;
+using System.IO;
+using System.Reflection;
+using HarmonyLib;
+using System.Collections;
 
 namespace ExtraLandscapingTools
 {
-	public class ExtraLandscapingTools : IMod
+	public class ELT : IMod
 	{
 		public static ILog log = LogManager.GetLogger($"{nameof(ExtraLandscapingTools)}").SetShowsErrorsInUI(false);
-
+		private Harmony harmony;
 		public void OnLoad(UpdateSystem updateSystem)
 		{
 			log.Info(nameof(OnLoad));
@@ -27,19 +32,38 @@ namespace ExtraLandscapingTools
 				All = [ComponentType.ReadOnly<TerraformingData>()]
 			};
 
-			ExtraLib.AddOnEditEnity(new(OnEditEntities, entityQueryDesc));
+			ExtraLib.AddOnEditEnities(new(OnEditEntities, entityQueryDesc));
+
+			harmony = new($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
+			harmony.PatchAll(typeof(ELT).Assembly);
+			var patchedMethods = harmony.GetPatchedMethods().ToArray();
+			Print.Info($"Plugin ExtraDetailingTools made patches! Patched methods: " + patchedMethods.Length);
+			foreach (var patchedMethod in patchedMethods)
+			{
+				Print.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
+			}			
 
 		}
 
 		public void OnDispose()
 		{
 			log.Info(nameof(OnDispose));
+			harmony.UnpatchAll($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
+		}
+
+		internal static Stream GetEmbedded(string embeddedPath) {
+			return Assembly.GetExecutingAssembly().GetManifestResourceStream("ExtraLandscapingTools.embedded."+embeddedPath);
 		}
 
 		public void OnEditEntities(NativeArray<Entity> entities)
 		{   
+			string[] removeTools = ["Material 1", "Material 2"];
+			
 			foreach(Entity entity in entities) {
 				if(ExtraLib.m_PrefabSystem.TryGetPrefab(entity, out TerraformingPrefab prefab)) {
+
+					if(removeTools.Contains(prefab.name)) continue;
+
 					var TerraformingUI = prefab.GetComponent<UIObject>();
 					if (TerraformingUI == null)
 					{
@@ -51,17 +75,12 @@ namespace ExtraLandscapingTools
 					}
 
 					TerraformingUI.m_Group?.RemoveElement(entity);
-					TerraformingUI.m_Group = PrefabsHelper.GetExistingToolCategory("Terraforming");
-					TerraformingUI.m_Group.AddElement(ExtraLib.m_EntityManager, entity);
-
-					ExtraLib.m_EntityManager.SetComponentData(entity, new UIObjectData
-					{
-						m_Group = ExtraLib.m_PrefabSystem.GetEntity(TerraformingUI.m_Group),
-						m_Priority = TerraformingUI.m_Priority
-					});
+					TerraformingUI.m_Group = PrefabsHelper.GetUIAssetCategoryPrefab("Terraforming");
+					TerraformingUI.m_Group.AddElement(entity);
+					
+					ExtraLib.m_EntityManager.AddOrSetComponentData(entity, TerraformingUI.ToComponentData());
 				}
 			}
 		}
-
 	}
 }
