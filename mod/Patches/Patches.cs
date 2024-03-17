@@ -1,5 +1,4 @@
 using Extra.Lib;
-using Extra.Lib.Debugger;
 using Game.Tools;
 using Game.UI.InGame;
 using HarmonyLib;

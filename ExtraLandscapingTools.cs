@@ -13,19 +13,30 @@ using System.IO;
 using System.Reflection;
 using HarmonyLib;
 using System.Collections;
+using Colossal.PSI.Common;
+using UnityEngine;
+using Colossal.PSI.Environment;
 
 namespace ExtraLandscapingTools
 {
 	public class ELT : IMod
 	{
-		public static ILog log = LogManager.GetLogger($"{nameof(ExtraLandscapingTools)}").SetShowsErrorsInUI(false);
+		private readonly GameObject ExtraLandscapingToolsGameObject = new();
+		internal static ILog log = LogManager.GetLogger($"{nameof(ExtraLandscapingTools)}").SetShowsErrorsInUI(false);
 		private Harmony harmony;
 		public void OnLoad(UpdateSystem updateSystem)
 		{
 			log.Info(nameof(OnLoad));
 
-			if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset))
+			if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset)) {
 				log.Info($"Current mod asset at {asset.path}");
+				FileInfo fileInfo = new(asset.path);
+				CustomBrushes.folderToLoadCustomBrushes.Add($"{fileInfo.Directory.FullName}\\Brushes");
+
+				string pathToDataBrushes = Path.Combine(EnvPath.kUserDataPath, "ModsData", nameof(ExtraLandscapingTools), "Brushes");
+				if(Directory.Exists(pathToDataBrushes)) CustomBrushes.folderToLoadCustomBrushes.Add(pathToDataBrushes);
+
+			}
 
 			EntityQueryDesc entityQueryDesc = new()
 			{
@@ -33,6 +44,7 @@ namespace ExtraLandscapingTools
 			};
 
 			ExtraLib.AddOnEditEnities(new(OnEditEntities, entityQueryDesc));
+			ExtraLib.AddOnMainMenu(OnMainMenu);
 
 			harmony = new($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
 			harmony.PatchAll(typeof(ELT).Assembly);
@@ -41,8 +53,7 @@ namespace ExtraLandscapingTools
 			foreach (var patchedMethod in patchedMethods)
 			{
 				Print.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
-			}			
-
+			}
 		}
 
 		public void OnDispose()
@@ -55,7 +66,11 @@ namespace ExtraLandscapingTools
 			return Assembly.GetExecutingAssembly().GetManifestResourceStream("ExtraLandscapingTools.embedded."+embeddedPath);
 		}
 
-		public void OnEditEntities(NativeArray<Entity> entities)
+		private void OnMainMenu() {
+			ExtraLib.extraLibMonoScript.StartCoroutine(CustomBrushes.LoadCustomBrushes());
+		}
+
+		private void OnEditEntities(NativeArray<Entity> entities)
 		{   
 			string[] removeTools = ["Material 1", "Material 2"];
 			
@@ -82,5 +97,5 @@ namespace ExtraLandscapingTools
 				}
 			}
 		}
-	}
+    }
 }

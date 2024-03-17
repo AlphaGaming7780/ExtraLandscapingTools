@@ -92,4 +92,11 @@
 		<None Include="$(ModTargetsFile)" Link="Properties\Mod.targets" />
 	</ItemGroup>
 
+  <Target Name="GetAdditionalFiles" AfterTargets="DeployWIP">
+    <ItemGroup>
+      <AdditionalFilesToDeploy Include="$(AdditionalFilesDirectory)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(AdditionalFilesToDeploy)" DestinationFiles="@(AdditionalFilesToDeploy->'$(DeployDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+  
 </Project>
