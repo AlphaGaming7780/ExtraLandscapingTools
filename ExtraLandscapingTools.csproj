@@ -23,10 +23,10 @@
 		<PublishConfigurationPath>Properties\PublishConfiguration.xml</PublishConfigurationPath>
 	</PropertyGroup>
   
-	<ItemGroup>
+	<!-- <ItemGroup>
 		<EmbeddedResource Include="embedded\UI\UI.js"></EmbeddedResource>
 		<EmbeddedResource Include="embedded\UI\REMOVE_UI.js"></EmbeddedResource>
-	</ItemGroup>
+	</ItemGroup> -->
 
 	<!--Imports must be after PropertyGroup block-->
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.props" />

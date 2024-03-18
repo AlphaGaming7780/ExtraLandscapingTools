@@ -74,7 +74,7 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 		}
 
 		let propsTextInput : PropsTextInput = {
-			focusKey: FOCUS_DISABLED,
+			focusKey:  FOCUS_DISABLED,
 			type: TextInputType.Text,
 			disabled: false,
 			multiline: 1,
