@@ -1,33 +1,70 @@
 ﻿<Publish>
 	<!--Id must be set in order to update existed mod. it is not required for publishing mod for the first time-->
-	<ModId Value="" />
+	<ModId Value="75728" />
 	<!--Name of the mod to display to players-->
 	<DisplayName Value="ExtraLandscapingTools" />
 	<!--Short description of the mod-->
-	<ShortDescription Value="This is a short description" />
+	<ShortDescription Value="This mod aims to add features and improve existing ones for the game's landscaping tool." />
 	<!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
 	<!--LongDescription Value="This is a long description" /-->
 	<LongDescription>
-This is a long description
+# ExtraLandscapingTools
+This mod aims to add features and improve existing ones for the game's landscaping tool.
+
+### -> [Full Changelog](https://github.com/AlphaGaming7780/ExtraLandscapingTools/blob/main/CHANGELOG.md)
+
+## Features
+### Brushes parameter
+You can now change the brush and rotate it.
+### Ore, Oil, Underground water and fertile land tools
+You can now add resources to your map using this tool.
+### Custom brush
+the support is done, there is just no wiki.
+if you want to know ping me on discord @triton_supreme.
+(See the [wiki](https://github.com/AlphaGaming7780/ExtraLandscapingTools/wiki).)
+
+## Feature roadmap
+* ✔️ Custom brush
+* ✔️ Brush angle
+* ✔️ Ore, Oil, Underground water and fertile land tools
+* ✔️ Brushes parameter
+
+# Acknowledgment
+* **CityRat** Thank you for your help and this thumbnail.
+* **optimus-code** Thanks for your knowledge and you help on various stuff in this mod.
+* **Yenyang** Thank you for all your help and knowledge on various game aspect AND PDX mods.
+* **T.D.W.** Thanks you for all the help with PDX mods.
+
+# Community
+Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join [Cities 2 Modding Discord](https://discord.gg/vd7HXnpPJf) or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
 	</LongDescription>
 	<!--Thumbnail-->
-	<Thumbnail Value="Properties/Thumbnail.png" />
+	<Thumbnail Value="Properties/ELT_Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
 	<Screenshot Value="" />
 	<!--Tag, can be set multiple times-->
-	<Tag Value="" />
+	<!-- <Tag Value="" /> -->
+	<Tag>
+		Code Mod
+		UI Mod
+	</Tag>
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.0" />
+	<ModVersion Value="1.0.0" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.0.*" />
 	<!--Dependency for the mod, can be set multiple times-->
-	<Dependency Id="" />
+	<Dependency Id="75724" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
-	<ChangeLog Value="" />
-	<!--ChangeLog>
-	</ChangeLog-->
+	<!-- <ChangeLog Value="" /> -->
+	<ChangeLog>
+		# v0.1.0
+		- Add: Custom Brush support.
+		- Add: Ore, Oil, Underground water and fertile land tools.
+		- Add: Tool parameter : angle.
+		- Add: Tool parameter : Brushes.
+	</ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
-	<ExternalLink Type="" Url="" />
+	<ExternalLink Type="github" Url="https://github.com/AlphaGaming7780/ExtraLandscapingTools" />
 </Publish>
