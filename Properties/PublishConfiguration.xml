@@ -59,11 +59,11 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-		# v0.1.0
-		- Add: Custom Brush support.
-		- Add: Ore, Oil, Underground water and fertile land tools.
-		- Add: Tool parameter : angle.
-		- Add: Tool parameter : Brushes.
+# v0.1.0
+- Add: Custom Brush support.
+- Add: Ore, Oil, Underground water and fertile land tools.
+- Add: Tool parameter : angle.
+- Add: Tool parameter : Brushes.
 	</ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
 	<ExternalLink Type="github" Url="https://github.com/AlphaGaming7780/ExtraLandscapingTools" />

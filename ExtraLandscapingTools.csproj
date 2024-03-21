@@ -62,11 +62,22 @@
 		<None Include="$(ModTargetsFile)" Link="Properties\Mod.targets" />
 	</ItemGroup>
 
-  <Target Name="GetAdditionalFiles" AfterTargets="DeployWIP">
-	<ItemGroup>
-	  <AdditionalFilesToDeploy Include="$(AdditionalFilesDirectory)\**\*.*" />
-	</ItemGroup>
-	<Copy SourceFiles="@(AdditionalFilesToDeploy)" DestinationFiles="@(AdditionalFilesToDeploy->'$(DeployDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
+	<Target Name="BuildUI" AfterTargets="AfterBuild">
+		<Exec Command="npm run build" WorkingDirectory="$(ProjectDir)/UI" />
+	</Target>
+
+	<Target Name="GetAdditionalFiles" AfterTargets="DeployWIP">
+		<ItemGroup>
+			<AdditionalFilesToDeploy Include="$(AdditionalFilesDirectory)\**\*.*" />
+		</ItemGroup>
+		<Copy SourceFiles="@(AdditionalFilesToDeploy)" DestinationFiles="@(AdditionalFilesToDeploy->'$(DeployDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
+	</Target>
   
+  	<Target Name="CopyUIFiles" AfterTargets="DeployWIP">
+		<ItemGroup>
+			<UIFiles Include="bin\UI\**\*.*" />
+		</ItemGroup>
+		<Copy SourceFiles="@(UIFiles)" DestinationFiles="@(UIFiles->'$(DeployDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
+	</Target>
+
 </Project>
