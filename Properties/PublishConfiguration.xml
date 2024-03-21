@@ -36,12 +36,12 @@ if you want to know ping me on discord @triton_supreme.
 * **T.D.W.** Thanks you for all the help with PDX mods.
 
 # Community
-Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join [Cities 2 Modding Discord](https://discord.gg/vd7HXnpPJf) or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
+Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
 	</LongDescription>
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/ELT_Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
-	<Screenshot Value="" />
+	<Screenshot Value="Properties/ELT_Thumbnail.png" />
 	<!--Tag, can be set multiple times-->
 	<!-- <Tag Value="" /> -->
 	<Tag>
@@ -53,18 +53,19 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Version of the mod-->
 	<ModVersion Value="1.0.0" />
 	<!--Recommended version of the base game to use the mod-->
-	<GameVersion Value="1.0.*" />
+	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
 	<Dependency Id="75724" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-		# v0.1.0
-		- Add: Custom Brush support.
-		- Add: Ore, Oil, Underground water and fertile land tools.
-		- Add: Tool parameter : angle.
-		- Add: Tool parameter : Brushes.
+# v0.1.0
+- Add: Custom Brush support.
+- Add: Ore, Oil, Underground water and fertile land tools.
+- Add: Tool parameter : angle.
+- Add: Tool parameter : Brushes.
 	</ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
 	<ExternalLink Type="github" Url="https://github.com/AlphaGaming7780/ExtraLandscapingTools" />
+  <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
 </Publish>

@@ -29,7 +29,7 @@ public class CustomBrushes
 
 		var notificationInfo = ExtraLib.m_NotificationUISystem.AddOrUpdateNotification(
 			$"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}.{nameof(CustomBrushes)}", 
-			title: "ExtraLandscapingTools, Loading the custom brushes.",
+			title: "ELT, Loading the custom brushes.",
 			progressState: ProgressState.Indeterminate, 
 			progress: 0
 		);
