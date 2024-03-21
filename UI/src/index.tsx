@@ -14,7 +14,6 @@ const register: ModRegistrar = (moduleRegistry) => {
 
     moduleRegistry.extend("game-ui/game/components/tool-options/mouse-tool-options/mouse-tool-options.tsx", 'MouseToolOptions', BrushesOptionsTool);
 
-
     moduleRegistry.append('Menu', HelloWorldComponent);
 }
 
