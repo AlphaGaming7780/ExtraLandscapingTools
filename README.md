@@ -1,6 +1,7 @@
 # ExtraLandscapingTools
 This mod aims to add features and improve existing ones for the game's landscaping tool.
 
+### -> [Mod Link](https://mods.paradoxplaza.com/mods/75728/Windows)
 ### -> [Full Changelog](https://github.com/AlphaGaming7780/ExtraLandscapingTools/blob/main/CHANGELOG.md)
 
 ## Features
