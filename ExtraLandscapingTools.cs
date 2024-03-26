@@ -12,8 +12,8 @@ using System.Linq;
 using System.IO;
 using System.Reflection;
 using HarmonyLib;
-using UnityEngine;
 using Colossal.PSI.Environment;
+using UnityEngine;
 
 namespace ExtraLandscapingTools
 {
@@ -21,6 +21,7 @@ namespace ExtraLandscapingTools
 	{
 		private readonly GameObject ExtraLandscapingToolsGameObject = new();
 		internal static ILog log = LogManager.GetLogger($"{nameof(ExtraLandscapingTools)}").SetShowsErrorsInUI(false);
+		internal static Extra.Lib.Debugger.Logger Logger = new(log);
 		private Harmony harmony;
 		public void OnLoad(UpdateSystem updateSystem)
 		{
@@ -47,10 +48,10 @@ namespace ExtraLandscapingTools
 			harmony = new($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
 			harmony.PatchAll(typeof(ELT).Assembly);
 			var patchedMethods = harmony.GetPatchedMethods().ToArray();
-			Print.Info($"Plugin ExtraDetailingTools made patches! Patched methods: " + patchedMethods.Length);
+			Logger.Info($"Plugin ExtraDetailingTools made patches! Patched methods: " + patchedMethods.Length);
 			foreach (var patchedMethod in patchedMethods)
 			{
-				Print.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
+				Logger.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
 			}
 		}
 

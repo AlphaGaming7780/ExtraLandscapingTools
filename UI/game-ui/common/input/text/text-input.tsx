@@ -1,9 +1,7 @@
 import { FocusKey } from "cs2/ui"
-import { ExtraLibUI } from "../../../../ExtraLibUI"
-import { EventInfo } from "cs2/bindings"
-import { FormEvent } from "react"
+import { getModule } from "cs2/modding"
 
-const path = "game-ui/common/input/text/text-input.tsx"
+const path$ = "game-ui/common/input/text/text-input.tsx"
 
 export enum TextInputType {
     Text = "text",
@@ -31,5 +29,5 @@ export type PropsTextInput = {
 
 export function TextInput(propsTextInput: PropsTextInput) : JSX.Element
 {
-	return ExtraLibUI.instance.registryData.registry.get(path)?.TextInput.render(propsTextInput)
+    return getModule(path$, "TextInput").render(propsTextInput)
 }

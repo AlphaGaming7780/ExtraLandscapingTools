@@ -1,7 +1,7 @@
 import { ModRegistrar } from "cs2/modding";
 import { BrushesOptionsTool } from "mods/Bruhes";
 import { HelloWorldComponent } from "mods/hello-world";
-import { ExtraLibUI } from "../ExtraLibUI/ExtraLibUI";
+//import { ExtraLibUI } from "../ExtraLibUI/ExtraLibUI";
 
 const register: ModRegistrar = (moduleRegistry) => {
     // While launching game in UI development mode (include --uiDeveloperMode in the launch options)
@@ -10,7 +10,7 @@ const register: ModRegistrar = (moduleRegistry) => {
     // - use the useModding() hook to access exposed UI, api and native coherent engine interfaces. 
     // Good luck and have fun!
 
-    ExtraLibUI.setRegistry(moduleRegistry)
+    //ExtraLibUI.setRegistry(moduleRegistry)
 
     moduleRegistry.extend("game-ui/game/components/tool-options/mouse-tool-options/mouse-tool-options.tsx", 'MouseToolOptions', BrushesOptionsTool);
 

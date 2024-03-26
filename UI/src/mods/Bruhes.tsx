@@ -2,12 +2,13 @@ import { useValue } from "cs2/api";
 import { useLocalization } from "cs2/l10n";
 import { ModuleRegistryExtend } from "cs2/modding";
 import { Brush, Entity, tool } from "cs2/bindings"
-import { Dropdown, DropdownItem, DropdownToggle, FOCUS_AUTO, FOCUS_DISABLED } from "cs2/ui";
+import { Dropdown, DropdownItem, DropdownToggle } from "cs2/ui";
 import { createElement } from "react";
 import { entityEquals, entityKey } from "cs2/utils";
 import { PropsSlider, SliderValueTransformer, Slider } from "../../ExtraLibUI/game-ui/common/input/slider/slider";
 import { PropsSection, Section } from "../../ExtraLibUI/game-ui/game/components/tool-options/mouse-tool-options/mouse-tool-options";
 import { PropsTextInput, TextInput, TextInputType } from "../../ExtraLibUI/game-ui/common/input/text/text-input";
+import { FOCUS_DISABLED$ } from "../../ExtraLibUI/game-ui/common/focus/focus-key";
 
 
 export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {	
@@ -30,7 +31,7 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 
 		var dropdownToggle = DropdownToggle({style: {"width": "80%"}, children: GetSelectedBrushName()})
 		
-		var dropDown = Dropdown({focusKey: FOCUS_DISABLED, theme: {dropdownToggle: "picker-toggle_d6k", dropdownPopup: "picker-popup_pUb", dropdownMenu: "", dropdownItem: "list-item_qRg item_H00", scrollable: "item-picker_ORP"}, content: reactNode, children: dropdownToggle})
+		var dropDown = Dropdown({focusKey: FOCUS_DISABLED$, theme: {dropdownToggle: "picker-toggle_d6k", dropdownPopup: "picker-popup_pUb", dropdownMenu: "", dropdownItem: "list-item_qRg item_H00", scrollable: "item-picker_ORP"}, content: reactNode, children: dropdownToggle})
 
 		var propsSection : PropsSection = {
 			title: "Brush",
@@ -45,7 +46,7 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 				brush.name
 			)
 
-			reactNode.push(DropdownItem<Entity>({focusKey: FOCUS_AUTO, value: brush.entity, selected: entityEquals(tool.selectedBrush$.value, brush.entity), theme: {dropdownItem:"list-item_qRg item_H00"}, closeOnSelect: false, children: element, onChange: tool.selectBrush}));
+			reactNode.push(DropdownItem<Entity>({focusKey: FOCUS_DISABLED$, value: brush.entity, selected: entityEquals(tool.selectedBrush$.value, brush.entity), theme: {dropdownItem:"list-item_qRg item_H00"}, closeOnSelect: false, children: element, onChange: tool.selectBrush}));
 		});
 
 		// translation handling. Translates using locale keys that are defined in C# or fallback string here.
@@ -58,7 +59,7 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 		var result : JSX.Element = Component();
 
 		var propsSlider : PropsSlider = {
-			focusKey: FOCUS_DISABLED,
+			focusKey: FOCUS_DISABLED$,
 			value: brushAngle,
 			start: 0,
 			end: 360,
@@ -74,7 +75,7 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 		}
 
 		let propsTextInput : PropsTextInput = {
-			focusKey:  FOCUS_DISABLED,
+			focusKey: FOCUS_DISABLED$,
 			type: TextInputType.Text,
 			disabled: false,
 			multiline: 1,
@@ -84,7 +85,6 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 				if(value?.target instanceof HTMLTextAreaElement) {
 					let number : number = parseInt(value.target.value, 10)
 					tool.setBrushAngle(number)
-					// console.log(number)
 				}
 			},
 		}

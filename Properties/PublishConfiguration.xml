@@ -34,6 +34,7 @@ if you want to know ping me on discord @triton_supreme.
 * **optimus-code** Thanks for your knowledge and you help on various stuff in this mod.
 * **Yenyang** Thank you for all your help and knowledge on various game aspect AND PDX mods.
 * **T.D.W.** Thanks you for all the help with PDX mods.
+* **Kylte** Thank you for the fix for the Focus bug and its vanilla component resolver that help me lot to understand and make UI.
 
 # Community
 Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
@@ -43,15 +44,11 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Screenshot, can be set multiple times-->
 	<Screenshot Value="Properties/ELT_Thumbnail.png" />
 	<!--Tag, can be set multiple times-->
-	<!-- <Tag Value="" /> -->
-	<Tag>
-		Code Mod
-		UI Mod
-	</Tag>
+	 <Tag Value="Code Mod" /> 
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.0.0" />
+	<ModVersion Value="1.1.0" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -59,12 +56,11 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# v0.1.0
-- Add: Custom Brush support.
-- Add: Ore, Oil, Underground water and fertile land tools.
-- Add: Tool parameter : angle.
-- Add: Tool parameter : Brushes.
-	</ChangeLog>
+# v1.1.0
+* Fixed the bug related to ExtendedUI, thanks to Klyte and Yenyang.
+* Update ExtraLibUI
+* Update for ExtraLib for 1.1.0
+  </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
 	<ExternalLink Type="github" Url="https://github.com/AlphaGaming7780/ExtraLandscapingTools" />
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
