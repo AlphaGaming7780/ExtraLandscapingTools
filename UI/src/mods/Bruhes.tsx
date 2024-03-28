@@ -5,10 +5,10 @@ import { Brush, Entity, tool } from "cs2/bindings"
 import { Dropdown, DropdownItem, DropdownToggle } from "cs2/ui";
 import { createElement } from "react";
 import { entityEquals, entityKey } from "cs2/utils";
-import { PropsSlider, SliderValueTransformer, Slider } from "../../ExtraLibUI/game-ui/common/input/slider/slider";
-import { PropsSection, Section } from "../../ExtraLibUI/game-ui/game/components/tool-options/mouse-tool-options/mouse-tool-options";
-import { PropsTextInput, TextInput, TextInputType } from "../../ExtraLibUI/game-ui/common/input/text/text-input";
-import { FOCUS_DISABLED$ } from "../../ExtraLibUI/game-ui/common/focus/focus-key";
+import { PropsSlider, SliderValueTransformer, Slider } from "../../game-ui/common/input/slider/slider";
+import { PropsSection, Section } from "../../game-ui/game/components/tool-options/mouse-tool-options/mouse-tool-options";
+import { PropsTextInput, TextInput, TextInputType } from "../../game-ui/common/input/text/text-input";
+import { FOCUS_DISABLED$ } from "../../game-ui/common/focus/focus-key";
 
 
 export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {	

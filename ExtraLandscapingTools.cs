@@ -21,8 +21,8 @@ namespace ExtraLandscapingTools
 	{
 		private readonly GameObject ExtraLandscapingToolsGameObject = new();
 		internal static ILog log = LogManager.GetLogger($"{nameof(ExtraLandscapingTools)}").SetShowsErrorsInUI(false);
-		internal static Extra.Lib.Debugger.Logger Logger = new(log);
-		private Harmony harmony;
+		internal static Extra.Lib.Debugger.Logger Logger = new(log); //{ get; private set; } 
+        private Harmony harmony;
 		public void OnLoad(UpdateSystem updateSystem)
 		{
 			log.Info(nameof(OnLoad));
