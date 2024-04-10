@@ -11,7 +11,6 @@ using Extra.Lib.Helper;
 using System.Linq;
 using System.IO;
 using System.Reflection;
-using HarmonyLib;
 using Colossal.PSI.Environment;
 using UnityEngine;
 
@@ -22,7 +21,7 @@ namespace ExtraLandscapingTools
 		private readonly GameObject ExtraLandscapingToolsGameObject = new();
 		internal static ILog log = LogManager.GetLogger($"{nameof(ExtraLandscapingTools)}").SetShowsErrorsInUI(false);
 		internal static Extra.Lib.Debugger.Logger Logger = new(log); //{ get; private set; } 
-        private Harmony harmony;
+        //private Harmony harmony;
 		public void OnLoad(UpdateSystem updateSystem)
 		{
 			log.Info(nameof(OnLoad));
@@ -45,20 +44,20 @@ namespace ExtraLandscapingTools
 			ExtraLib.AddOnEditEnities(new(OnEditEntities, entityQueryDesc));
 			ExtraLib.AddOnMainMenu(OnMainMenu);
 
-			harmony = new($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
-			harmony.PatchAll(typeof(ELT).Assembly);
-			var patchedMethods = harmony.GetPatchedMethods().ToArray();
-			Logger.Info($"Plugin ExtraDetailingTools made patches! Patched methods: " + patchedMethods.Length);
-			foreach (var patchedMethod in patchedMethods)
-			{
-				Logger.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
-			}
+			//harmony = new($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
+			//harmony.PatchAll(typeof(ELT).Assembly);
+			//var patchedMethods = harmony.GetPatchedMethods().ToArray();
+			//Logger.Info($"Plugin ExtraLandscapingTools made patches! Patched methods: " + patchedMethods.Length);
+			//foreach (var patchedMethod in patchedMethods)
+			//{
+			//	Logger.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
+			//}
 		}
 
 		public void OnDispose()
 		{
 			log.Info(nameof(OnDispose));
-			harmony.UnpatchAll($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
+			//harmony.UnpatchAll($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
 		}
 
 		internal static Stream GetEmbedded(string embeddedPath) {
