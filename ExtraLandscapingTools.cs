@@ -24,17 +24,19 @@ namespace ExtraLandscapingTools
         //private Harmony harmony;
 		public void OnLoad(UpdateSystem updateSystem)
 		{
-			log.Info(nameof(OnLoad));
+            Logger.Info(nameof(OnLoad));
 
-			if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset)) {
-				log.Info($"Current mod asset at {asset.path}");
+			if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset))
+			{
+				Logger.Info($"Current mod asset at {asset.path}");
 				FileInfo fileInfo = new(asset.path);
 				CustomBrushes.folderToLoadCustomBrushes.Add($"{fileInfo.Directory.FullName}\\Brushes");
 
 				string pathToDataBrushes = Path.Combine(EnvPath.kUserDataPath, "ModsData", nameof(ExtraLandscapingTools), "Brushes");
-				if(Directory.Exists(pathToDataBrushes)) CustomBrushes.folderToLoadCustomBrushes.Add(pathToDataBrushes);
+				if (Directory.Exists(pathToDataBrushes)) CustomBrushes.folderToLoadCustomBrushes.Add(pathToDataBrushes);
 
 			}
+			else Logger.Error("Failed to get the ExecutableAsset.");
 
 			EntityQueryDesc entityQueryDesc = new()
 			{
@@ -56,7 +58,7 @@ namespace ExtraLandscapingTools
 
 		public void OnDispose()
 		{
-			log.Info(nameof(OnDispose));
+            Logger.Info(nameof(OnDispose));
 			//harmony.UnpatchAll($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
 		}
 
