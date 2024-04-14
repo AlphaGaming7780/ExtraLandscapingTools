@@ -25,10 +25,14 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="embedded\Localization\Localization.json"></EmbeddedResource>
+    <EmbeddedResource Include="embedded\Localization\*.json" />
   </ItemGroup>
 
-	<!--Imports must be after PropertyGroup block-->
+  <!--<EmbeddedResource Include="embedded\Localization\de-DE.json" />
+  <EmbeddedResource Include="embedded\Localization\fr-FR.json" />
+  <EmbeddedResource Include="embedded\Localization\en-US.json" />-->
+
+  <!--Imports must be after PropertyGroup block-->
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.props" />
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.targets" />
 

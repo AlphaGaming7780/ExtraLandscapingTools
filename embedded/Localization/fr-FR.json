@@ -1,8 +1,6 @@
 {
-	"Localization": {
-		"Assets.DESCRIPTION[Ore Resource Tool]": "Outil de Ressources Minières",
-		"Assets.DESCRIPTION[Oil Resource Tool]": "Outil de Ressources Pétrolières",
-		"Assets.DESCRIPTION[FertileLand Resource Tool]": "Outil de Ressources en Terres Fertiles",
-		"Assets.DESCRIPTION[GroundWater Resource Tool]": "Outil de Ressources en Eau Souterraine"
-	}
+	"Assets.DESCRIPTION[Ore Resource Tool]": "Outil de Ressources Minières",
+	"Assets.DESCRIPTION[Oil Resource Tool]": "Outil de Ressources Pétrolières",
+	"Assets.DESCRIPTION[FertileLand Resource Tool]": "Outil de Ressources en Terres Fertiles",
+	"Assets.DESCRIPTION[GroundWater Resource Tool]": "Outil de Ressources en Eau Souterraine"
 }
