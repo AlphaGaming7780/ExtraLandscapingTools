@@ -1,0 +1,3 @@
+files:
+  - source: embedded/Localization/en-US.json
+    translation: '%locale%.json'
