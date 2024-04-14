@@ -5,6 +5,7 @@
 		<TargetFramework>net472</TargetFramework>
 		<Configurations>Debug;Release</Configurations>
 		<langVersion>latest</langVersion>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
 		
 		<!--The folder where Game.dll is located. Set it only if the game is not installed in the default location, otherwise keep it empty-->
 		<CustomManagedPath>E:\SteamLibrary\steamapps\common\Cities Skylines II\Cities2_Data\Managed</CustomManagedPath>
@@ -22,11 +23,10 @@
 		<!--The file where mod information which is required for publishing mod on PDX mods are stored-->
 		<PublishConfigurationPath>Properties\PublishConfiguration.xml</PublishConfigurationPath>
 	</PropertyGroup>
-  
-	<!-- <ItemGroup>
-		<EmbeddedResource Include="embedded\UI\UI.js"></EmbeddedResource>
-		<EmbeddedResource Include="embedded\UI\REMOVE_UI.js"></EmbeddedResource>
-	</ItemGroup> -->
+
+  <ItemGroup>
+    <EmbeddedResource Include="embedded\Localization\Localization.json"></EmbeddedResource>
+  </ItemGroup>
 
 	<!--Imports must be after PropertyGroup block-->
 	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.props" />

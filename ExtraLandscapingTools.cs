@@ -4,7 +4,6 @@ using Game.Modding;
 using Game.SceneFlow;
 using Unity.Entities;
 using Unity.Collections;
-using Game.Prefabs;
 using Extra.Lib;
 using Extra.Lib.Debugger;
 using Extra.Lib.Helper;
@@ -13,6 +12,8 @@ using System.IO;
 using System.Reflection;
 using Colossal.PSI.Environment;
 using UnityEngine;
+using Extra.Lib.Localization;
+using Game.Prefabs;
 
 namespace ExtraLandscapingTools
 {
@@ -42,7 +43,7 @@ namespace ExtraLandscapingTools
 			{
 				All = [ComponentType.ReadOnly<TerraformingData>()]
 			};
-
+			Localization
 			ExtraLib.AddOnEditEnities(new(OnEditEntities, entityQueryDesc));
 			ExtraLib.AddOnMainMenu(OnMainMenu);
 
