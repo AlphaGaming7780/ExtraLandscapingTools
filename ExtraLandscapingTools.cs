@@ -48,6 +48,7 @@ namespace ExtraLandscapingTools
 			{
 				All = [ComponentType.ReadOnly<TerraformingData>()]
 			};
+
 			ExtraLocalization.LoadLocalization(Logger, Assembly.GetExecutingAssembly(), false);
 			ExtraLib.AddOnEditEnities(new(OnEditEntities, entityQueryDesc));
 			ExtraLib.AddOnMainMenu(OnMainMenu);
