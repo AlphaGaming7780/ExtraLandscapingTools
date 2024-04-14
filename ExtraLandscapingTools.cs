@@ -14,6 +14,7 @@ using Colossal.PSI.Environment;
 using UnityEngine;
 using Extra.Lib.Localization;
 using Game.Prefabs;
+using Logger = Extra.Lib.Debugger.Logger;
 
 namespace ExtraLandscapingTools
 {
@@ -21,9 +22,13 @@ namespace ExtraLandscapingTools
 	{
 		private readonly GameObject ExtraLandscapingToolsGameObject = new();
 		internal static ILog log = LogManager.GetLogger($"{nameof(ExtraLandscapingTools)}").SetShowsErrorsInUI(false);
-		internal static Extra.Lib.Debugger.Logger Logger = new(log); //{ get; private set; } 
+#if DEBUG
+        internal static Logger Logger = new(log, true);
+#else
+		internal static Logger Logger = new(log, false);
+#endif
         //private Harmony harmony;
-		public void OnLoad(UpdateSystem updateSystem)
+        public void OnLoad(UpdateSystem updateSystem)
 		{
             Logger.Info(nameof(OnLoad));
 
@@ -43,7 +48,7 @@ namespace ExtraLandscapingTools
 			{
 				All = [ComponentType.ReadOnly<TerraformingData>()]
 			};
-			Localization
+			ExtraLocalization.LoadLocalization(Logger, Assembly.GetExecutingAssembly(), false);
 			ExtraLib.AddOnEditEnities(new(OnEditEntities, entityQueryDesc));
 			ExtraLib.AddOnMainMenu(OnMainMenu);
 
