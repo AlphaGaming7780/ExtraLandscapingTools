@@ -102,7 +102,6 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 			result.props.children?.unshift(
 				Section(propsSection),
 				Section(sliderPropsSection)
-				
 			);
 		}
 		return result;
