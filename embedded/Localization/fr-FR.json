@@ -1,4 +1,6 @@
 {
+	"Toolbar.BRUSH": "Brush",
+	"Toolbar.BRUSH_ROTATION": "Brush Rotation",
 	"Assets.DESCRIPTION[Ore Resource Tool]": "Outil de Ressources Minières",
 	"Assets.DESCRIPTION[Oil Resource Tool]": "Outil de Ressources Pétrolières",
 	"Assets.DESCRIPTION[FertileLand Resource Tool]": "Outil de Ressources en Terres Fertiles",
