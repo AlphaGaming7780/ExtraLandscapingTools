@@ -62,6 +62,8 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 * Update for ExtraLib for 1.1.0
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
-	<ExternalLink Type="github" Url="https://github.com/AlphaGaming7780/ExtraLandscapingTools" />
+  <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extralandscapingtools" />
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
+  <ExternalLink Type="github" Url="https://github.com/AlphaGaming7780/ExtraLandscapingTools" />
+  <ExternalLink Type="paypal" Url="https://www.paypal.com/paypalme/TritonSupreme" />
 </Publish>
