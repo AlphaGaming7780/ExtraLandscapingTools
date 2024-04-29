@@ -19,6 +19,8 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 		let selectedBrush : Entity = useValue(tool.selectedBrush$);
 		let brushAngle : number = useValue(tool.brushAngle$);
 		var reactNode : JSX.Element[] = [];
+		// translation handling. Translates using locale keys that are defined in C# or fallback string here.
+		const { translate } = useLocalization();
 
 		function GetSelectedBrushName() : string { // brushes : Brush[], entity: Entity
 			for(let i = 0; i < brushes.length; i++) {
@@ -34,7 +36,7 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 		var dropDown = Dropdown({focusKey: FOCUS_DISABLED$, theme: {dropdownToggle: "picker-toggle_d6k", dropdownPopup: "picker-popup_pUb", dropdownMenu: "", dropdownItem: "list-item_qRg item_H00", scrollable: "item-picker_ORP"}, content: reactNode, children: dropdownToggle})
 
 		var propsSection : PropsSection = {
-			title: "Brush",
+			title: translate("Toolbar.BRUSH"),
 			children: dropDown
 		}
 
@@ -48,9 +50,6 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 
 			reactNode.push(DropdownItem<Entity>({focusKey: FOCUS_DISABLED$, value: brush.entity, selected: entityEquals(tool.selectedBrush$.value, brush.entity), theme: {dropdownItem:"list-item_qRg item_H00"}, closeOnSelect: false, children: element, onChange: tool.selectBrush}));
 		});
-
-		// translation handling. Translates using locale keys that are defined in C# or fallback string here.
-		// const { translate } = useLocalization();
 		
 		// This defines aspects of the components.
 		const { children, ...otherProps} = props || {};
@@ -90,7 +89,7 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 		}
 
 		var sliderPropsSection : PropsSection = {
-			title: "Brush Rotation",
+			title: translate("Toolbar.BRUSH_ROTATION"),
 			children: [
 				<div className="slider-container_Q_K" style={{width:"27.5%"}}>{Slider(propsSlider)}</div>,
 				TextInput(propsTextInput)
