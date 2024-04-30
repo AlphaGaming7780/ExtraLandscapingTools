@@ -19,6 +19,21 @@ See the [wiki](https://github.com/AlphaGaming7780/ExtraLandscapingTools/wiki).
 * ✔️ Ore, Oil, Underground water and fertile land tools
 * ✔️ Brushes parameter
 
+# Translation
+| Language				| Progress	| Participants |
+| --------------------- | ---------	| ------------ |
+| French				| 80%		| |
+| Chinese Simplified	| 0%		| |
+| Chinese Traditional	| 0%		| |
+| German				| 80%		| |
+| Italian				| 0%		| |
+| Japanese				| 0%		| |
+| Korean				| 0%		| Twotoolus-FLY-LShst |
+| Polish				| 0%		| |
+| Portuguese, Brazilian | 0%		| |
+| Russian				| 0%		| |
+| Spanish				| 0%		| |
+
 # Acknowledgment
 * **CityRat** For the custom icons.
 * **Chamëleon TBN** For the custom icons.
