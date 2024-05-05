@@ -3,6 +3,7 @@ This mod aims to add features and improve existing ones for the game's landscapi
 
 ### -> [Mod Link](https://mods.paradoxplaza.com/mods/75728/Windows)
 ### -> [Full Changelog](https://github.com/AlphaGaming7780/ExtraLandscapingTools/blob/main/CHANGELOG.md)
+### -> [Crowdin](https://crowdin.com/project/extralandscapingtools)
 
 ## Features
 ### Brushes parameter
@@ -28,8 +29,8 @@ See the [wiki](https://github.com/AlphaGaming7780/ExtraLandscapingTools/wiki).
 | German				| 80%		| |
 | Italian				| 0%		| |
 | Japanese				| 0%		| |
-| Korean				| 0%		| Twotoolus-FLY-LShst |
-| Polish				| 0%		| |
+| Korean				| 100%		| Twotoolus-FLY-LShst, Hinanchovo |
+| Polish				| 100%		| Lisek |
 | Portuguese, Brazilian | 0%		| |
 | Russian				| 0%		| |
 | Spanish				| 0%		| |

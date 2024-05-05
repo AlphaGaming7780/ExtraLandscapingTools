@@ -11,17 +11,14 @@
 # ExtraLandscapingTools
 This mod aims to add features and improve existing ones for the game's landscaping tool.
 
-### -> [Full Changelog](https://github.com/AlphaGaming7780/ExtraLandscapingTools/blob/main/CHANGELOG.md)
-
 ## Features
 ### Brushes parameter
 You can now change the brush and rotate it.
 ### Ore, Oil, Underground water and fertile land tools
 You can now add resources to your map using this tool.
 ### Custom brush
-the support is done, there is just no wiki.
-if you want to know ping me on discord @triton_supreme.
-(See the [wiki](https://github.com/AlphaGaming7780/ExtraLandscapingTools/wiki).)
+You can now add custom brushes to your game, check the wiki on the Github page of the mod.
+if you need help, ping me on discord @triton_supreme.
 
 ## Feature roadmap
 * ✔️ Custom brush
@@ -45,8 +42,8 @@ if you want to know ping me on discord @triton_supreme.
 | German								| 80%				| |
 | Italian								| 0%				| |
 | Japanese							| 0%				| |
-| Korean								| 80%				| Twotoolus-FLY-LShst |
-| Polish								| 0%				| |
+| Korean								| 80%				| Twotoolus-FLY-LShst, Hinanchovo |
+| Polish								| 100%			| Lisek |
 | Portuguese, Brazilian | 0%				| |
 | Russian								| 0%				| |
 | Spanish								| 0%				| |

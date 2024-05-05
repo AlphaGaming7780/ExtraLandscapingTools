@@ -36,9 +36,9 @@ namespace ExtraLandscapingTools
 			{
 				Logger.Info($"Current mod asset at {asset.path}");
 				FileInfo fileInfo = new(asset.path);
-				CustomBrushes.folderToLoadCustomBrushes.Add($"{fileInfo.Directory.FullName}\\Brushes");
+				CustomBrushes.folderToLoadCustomBrushes.Add($"{fileInfo.Directory.FullName}\\CustomBrushes");
 
-				string pathToDataBrushes = Path.Combine(EnvPath.kUserDataPath, "ModsData", nameof(ExtraLandscapingTools), "Brushes");
+				string pathToDataBrushes = Path.Combine(EnvPath.kUserDataPath, "ModsData", nameof(ExtraLandscapingTools), "CustomBrushes");
 				if (Directory.Exists(pathToDataBrushes)) CustomBrushes.folderToLoadCustomBrushes.Add(pathToDataBrushes);
 
 			}
