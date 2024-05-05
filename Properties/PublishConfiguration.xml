@@ -34,19 +34,17 @@ if you need help, ping me on discord @triton_supreme.
 * **Kylte** Thank you for the fix for the Focus bug and its vanilla component resolver that help me lot to understand and make UI.
 
 # Translation
-| Language							| Progress	| Participants |
-| --------------------- | ---------	| ------------ |
-| French								| 80%				| |
-| Chinese Simplified		| 0%				| |
-| Chinese Traditional		| 0%				| |
-| German								| 80%				| |
-| Italian								| 0%				| |
-| Japanese							| 0%				| |
-| Korean								| 80%				| Twotoolus-FLY-LShst, Hinanchovo |
-| Polish								| 100%			| Lisek |
-| Portuguese, Brazilian | 0%				| |
-| Russian								| 0%				| |
-| Spanish								| 0%				| |
+- ⚠️French 80%
+- ❌Chinese Simplified 0%
+- ❌Chinese Traditional 0%
+- ⚠️German 80%
+- ❌Italian 0%
+- ❌Japanese 0%
+- ✔️Korean 100% : Twotoolus-FLY-LShst, Hinanchovo
+- ✔️Polish 100% : Lisek
+- ❌Portuguese, Brazilian 0%
+- ❌Russian 0%
+- ❌Spanish 0%
 
 # Community
 Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
@@ -54,13 +52,13 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/ELT_Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
-	<Screenshot Value="Properties/ELT_Thumbnail.png" />
+	<!--<Screenshot Value="Properties/ELT_LONG.png" />-->
 	<!--Tag, can be set multiple times-->
 	 <Tag Value="Code Mod" /> 
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.1.0" />
+	<ModVersion Value="1.2.0" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -68,10 +66,9 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# v1.1.0
-* Fixed the bug related to ExtendedUI, thanks to Klyte and Yenyang.
-* Update ExtraLibUI
-* Update for ExtraLib for 1.1.0
+# v1.2.0
+* Add localization support
+* Code optimization
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extralandscapingtools" />
