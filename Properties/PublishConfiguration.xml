@@ -34,7 +34,7 @@ if you need help, ping me on discord @triton_supreme.
 * **Kylte** Thank you for the fix for the Focus bug and its vanilla component resolver that help me lot to understand and make UI.
 
 # Translation
-⚠️ I DON'T CHECK THE TRANSLATION, I DON'T TAKE THE RESPONSABILITY FOR WHAT YOU ARE GOING TO READ⚠️
+⚠️ I DON'T CHECK THE TRANSLATION, I DON'T TAKE THE RESPONSIBILITY FOR WHAT YOU ARE GOING TO READ. ⚠️
 - ⚠️French 80%
 - ✔️Chinese Simplified 100% : RilkeXS(无手文) (RilkeXS)
 - ❌Chinese Traditional 0%
@@ -53,7 +53,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/ELT_Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
-	<!--<Screenshot Value="Properties/ELT_LONG.png" />-->
+	<Screenshot Value="Properties/ELT_LONG.png" />
 	<!--Tag, can be set multiple times-->
 	 <Tag Value="Code Mod" /> 
 	<!--Link to the forum post where the mod can be discussed-->

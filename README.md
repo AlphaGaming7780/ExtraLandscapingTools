@@ -21,10 +21,13 @@ See the [wiki](https://github.com/AlphaGaming7780/ExtraLandscapingTools/wiki).
 * ✔️ Brushes parameter
 
 # Translation
+> !WARNING
+> ⚠️ I DON'T CHECK THE TRANSLATION, I DON'T TAKE THE RESPONSIBILITY FOR WHAT YOU ARE GOING TO READ. ⚠️
+
 | Language				| Progress	| Participants |
 | --------------------- | ---------	| ------------ |
 | French				| 80%		| |
-| Chinese Simplified	| 0%		| |
+| Chinese Simplified	| 100%		| RilkeXS(无手文) (RilkeXS) |
 | Chinese Traditional	| 0%		| |
 | German				| 80%		| |
 | Italian				| 0%		| |
@@ -32,8 +35,8 @@ See the [wiki](https://github.com/AlphaGaming7780/ExtraLandscapingTools/wiki).
 | Korean				| 100%		| Twotoolus-FLY-LShst, Hinanchovo |
 | Polish				| 100%		| Lisek |
 | Portuguese, Brazilian | 0%		| |
-| Russian				| 0%		| |
-| Spanish				| 0%		| |
+| Russian				| 20%		| chromakeeeey |
+| Spanish				| 100%		| elGendo87 |
 
 # Acknowledgment
 * **CityRat** For the custom icons.
