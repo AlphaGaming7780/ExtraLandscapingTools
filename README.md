@@ -21,7 +21,7 @@ See the [wiki](https://github.com/AlphaGaming7780/ExtraLandscapingTools/wiki).
 * ✔️ Brushes parameter
 
 # Translation
-> !IMPORTANT
+> [!WARNING]  
 > ⚠️ I DON'T CHECK THE TRANSLATION, I DON'T TAKE THE RESPONSIBILITY FOR WHAT YOU ARE GOING TO READ. ⚠️
 
 | Language				| Progress	| Participants |
