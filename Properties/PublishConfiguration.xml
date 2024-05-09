@@ -34,7 +34,7 @@ if you need help, ping me on discord @triton_supreme.
 * **Kylte** Thank you for the fix for the Focus bug and its vanilla component resolver that help me lot to understand and make UI.
 
 # Translation
-⚠️ I DON'T CHECK THE TRANSLATION, I DON'T TAKE THE RESPONSIBILITY FOR WHAT YOU ARE GOING TO READ. ⚠️
+⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
 - ⚠️French 80%
 - ✔️Chinese Simplified 100% : RilkeXS(无手文) (RilkeXS)
 - ❌Chinese Traditional 0%
@@ -59,7 +59,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extralandscapingtools.1647852/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.2.0" />
+	<ModVersion Value="1.2.1" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -68,7 +68,8 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
 # v1.2.1
-- Add: German localization by Konsi
+- Add: Chinese Simplified localization by RilkeXS(无手文) (RilkeXS)
+- Add: Spanish localization by elGendo87
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extralandscapingtools" />
