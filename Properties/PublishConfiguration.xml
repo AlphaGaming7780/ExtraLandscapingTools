@@ -35,7 +35,7 @@ if you need help, ping me on discord @triton_supreme.
 
 # Translation
 ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
-- ⚠️French 80%
+- ✔️French 100% : Morgan Touverey Quilling (mtouverey)
 - ✔️Chinese Simplified 100% : RilkeXS(无手文) (RilkeXS)
 - ❌Chinese Traditional 0%
 - ⚠️German 80%
@@ -59,7 +59,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extralandscapingtools.1647852/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.2.1" />
+	<ModVersion Value="1.2.2" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -67,9 +67,8 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# v1.2.1
-- Add: Chinese Simplified localization by RilkeXS(无手文) (RilkeXS)
-- Add: Spanish localization by elGendo87
+# v1.2.2
+- Add: French localization by Morgan Touverey Quilling (mtouverey)
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extralandscapingtools" />
