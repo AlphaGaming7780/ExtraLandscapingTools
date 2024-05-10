@@ -1,8 +1,8 @@
 {
-	"Toolbar.BRUSH": "Brush",
-	"Toolbar.BRUSH_ROTATION": "Brush Rotation",
-	"Assets.DESCRIPTION[Ore Resource Tool]": "Outil de Ressources Minières",
-	"Assets.DESCRIPTION[Oil Resource Tool]": "Outil de Ressources Pétrolières",
-	"Assets.DESCRIPTION[FertileLand Resource Tool]": "Outil de Ressources en Terres Fertiles",
-	"Assets.DESCRIPTION[GroundWater Resource Tool]": "Outil de Ressources en Eau Souterraine"
+	"Toolbar.BRUSH": "Brosse",
+	"Toolbar.BRUSH_ROTATION": "Rotation de la brosse",
+	"Assets.DESCRIPTION[Ore Resource Tool]": "Outil de ressources minières",
+	"Assets.DESCRIPTION[Oil Resource Tool]": "Outil de ressources pétrolières",
+	"Assets.DESCRIPTION[FertileLand Resource Tool]": "Outil de ressources en terres fertiles",
+	"Assets.DESCRIPTION[GroundWater Resource Tool]": "Outil de ressources en eaux souterraines"
 }
