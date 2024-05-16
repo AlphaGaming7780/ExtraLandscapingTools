@@ -1,8 +1,8 @@
 {
-	"Toolbar.BRUSH": "Brush",
-	"Toolbar.BRUSH_ROTATION": "Brush Rotation",
-	"Assets.DESCRIPTION[Ore Resource Tool]": "Инструмент для добычи ресурсов",
-	"Assets.DESCRIPTION[Oil Resource Tool]": "Oil Resource Tool",
-	"Assets.DESCRIPTION[FertileLand Resource Tool]": "FertileLand Resource Tool",
-	"Assets.DESCRIPTION[GroundWater Resource Tool]": "GroundWater Resource Tool"
+	"Toolbar.BRUSH": "Кисть",
+	"Toolbar.BRUSH_ROTATION": "Вращение кисти",
+	"Assets.DESCRIPTION[Ore Resource Tool]": "Инструмент добычи рудных ресурсов",
+	"Assets.DESCRIPTION[Oil Resource Tool]": "Инструмент добычи нефтяных ресурсов",
+	"Assets.DESCRIPTION[FertileLand Resource Tool]": "Инструмент плодородных земельных ресурсов",
+	"Assets.DESCRIPTION[GroundWater Resource Tool]": "Инструмент ресурсов подземных вод"
 }
