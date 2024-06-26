@@ -1,8 +1,15 @@
 {
-	"Toolbar.BRUSH": "Pinsel",
-	"Toolbar.BRUSH_ROTATION": "Pinseldrehung",
-	"Assets.DESCRIPTION[Ore Resource Tool]": "Erz-Ressourcenwerkzeug",
-	"Assets.DESCRIPTION[Oil Resource Tool]": "Öl-Ressourcenwerkzeug",
-	"Assets.DESCRIPTION[FertileLand Resource Tool]": "Fruchtbares Land-Ressourcenwerkzeug",
-	"Assets.DESCRIPTION[GroundWater Resource Tool]": "Grundwasser-Ressourcenwerkzeug"
+  "Toolbar.BRUSH": "Pinsel",
+  "Toolbar.BRUSH_ROTATION": "Pinseldrehung",
+  "Assets.DESCRIPTION[Ore Resource Tool]": "Erz-Ressourcenwerkzeug",
+  "Assets.DESCRIPTION[Oil Resource Tool]": "Öl-Ressourcenwerkzeug",
+  "Assets.DESCRIPTION[FertileLand Resource Tool]": "Fruchtbares Land-Ressourcenwerkzeug",
+  "Assets.DESCRIPTION[GroundWater Resource Tool]": "Grundwasser-Ressourcenwerkzeug",
+  "Options.SECTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT]": "ExtraLandscapingTools",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Clear depleted fertility resource",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Clear depleted fertility resource so you can use them again.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Clear depleted ore resource",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Clear depleted ore resource so you can use them again.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Clear depleted oil resource",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Clear depleted oil resource so you can use them again."
 }
