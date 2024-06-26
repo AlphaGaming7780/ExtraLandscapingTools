@@ -6,10 +6,10 @@
   "Assets.DESCRIPTION[FertileLand Resource Tool]": "Narzędzie - Żyzna ziemia",
   "Assets.DESCRIPTION[GroundWater Resource Tool]": "Narzędzie - Woda gruntowa",
   "Options.SECTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT]": "ExtraLandscapingTools",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Clear depleted fertility resource",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Clear depleted fertility resource so you can use them again.",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Clear depleted ore resource",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Clear depleted ore resource so you can use them again.",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Clear depleted oil resource",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Clear depleted oil resource so you can use them again."
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Wyczyść wyczerpane zasoby żyznej ziemi",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Wyczyść wyczerpane zasoby żyznej ziemi, aby móc je ponownie wykorzystać.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Wyczyść wyczerpane zasoby rudy",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Wyczyść wyczerpane zasoby rudy, aby móc je ponownie wykorzystać.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Wyczyść wyczerpane zasoby ropy",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Wyczyść wyczerpane zasoby ropy, aby móc je ponownie wykorzystać."
 }
