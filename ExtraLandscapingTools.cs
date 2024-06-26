@@ -15,12 +15,14 @@ using UnityEngine;
 using Extra.Lib.Localization;
 using Game.Prefabs;
 using Logger = Extra.Lib.Debugger.Logger;
+using Colossal.IO.AssetDatabase;
+using Game.Settings;
 
 namespace ExtraLandscapingTools
 {
 	public class ELT : IMod
 	{
-		private readonly GameObject ExtraLandscapingToolsGameObject = new();
+        internal static ELTSettings s_setting;
 		internal static ILog log = LogManager.GetLogger($"{nameof(ExtraLandscapingTools)}").SetShowsErrorsInUI(false);
 #if DEBUG
         internal static Logger Logger = new(log, true);
@@ -44,9 +46,19 @@ namespace ExtraLandscapingTools
 			}
 			else Logger.Error("Failed to get the ExecutableAsset.");
 
-			EntityQueryDesc entityQueryDesc = new()
+            s_setting = new ELTSettings(this);
+            s_setting.RegisterKeyBindings();
+            s_setting.RegisterInOptionsUI();
+            AssetDatabase.global.LoadSettings("ELTSettings", s_setting, new ELTSettings(this));
+
+            Logger.Info(s_setting.GetOptionDescLocaleID("ClearDepletedFertilityResource"));
+            Logger.Info(s_setting.GetOptionFormatLocaleID("ClearDepletedFertilityResource"));
+
+            updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
+
+            EntityQueryDesc entityQueryDesc = new()
 			{
-				All = [ComponentType.ReadOnly<TerraformingData>()]
+				All = new[] { ComponentType.ReadOnly<TerraformingData>() }
 			};
 
 			ExtraLocalization.LoadLocalization(Logger, Assembly.GetExecutingAssembly(), false);
@@ -79,12 +91,11 @@ namespace ExtraLandscapingTools
 
 		private void OnEditEntities(NativeArray<Entity> entities)
 		{   
-			string[] removeTools = ["Material 1", "Material 2"];
 			
 			foreach(Entity entity in entities) {
 				if(ExtraLib.m_PrefabSystem.TryGetPrefab(entity, out TerraformingPrefab prefab)) {
 
-					if(removeTools.Contains(prefab.name)) continue;
+					if(prefab.m_Target == TerraformingTarget.Material) continue;
 
 					var TerraformingUI = prefab.GetComponent<UIObject>();
 					if (TerraformingUI == null)
