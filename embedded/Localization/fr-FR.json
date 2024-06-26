@@ -1,8 +1,15 @@
 {
-	"Toolbar.BRUSH": "Brosse",
-	"Toolbar.BRUSH_ROTATION": "Rotation de la brosse",
-	"Assets.DESCRIPTION[Ore Resource Tool]": "Outil de ressources minières",
-	"Assets.DESCRIPTION[Oil Resource Tool]": "Outil de ressources pétrolières",
-	"Assets.DESCRIPTION[FertileLand Resource Tool]": "Outil de ressources en terres fertiles",
-	"Assets.DESCRIPTION[GroundWater Resource Tool]": "Outil de ressources en eaux souterraines"
+  "Toolbar.BRUSH": "Brosse",
+  "Toolbar.BRUSH_ROTATION": "Rotation de la brosse",
+  "Assets.DESCRIPTION[Ore Resource Tool]": "Outil de ressources minières",
+  "Assets.DESCRIPTION[Oil Resource Tool]": "Outil de ressources pétrolières",
+  "Assets.DESCRIPTION[FertileLand Resource Tool]": "Outil de ressources en terres fertiles",
+  "Assets.DESCRIPTION[GroundWater Resource Tool]": "Outil de ressources en eaux souterraines",
+  "Options.SECTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT]": "ExtraLandscapingTools",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Clear depleted fertility resource",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Clear depleted fertility resource so you can use them again.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Clear depleted ore resource",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Clear depleted ore resource so you can use them again.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Clear depleted oil resource",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Clear depleted oil resource so you can use them again."
 }
