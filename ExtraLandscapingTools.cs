@@ -51,9 +51,6 @@ namespace ExtraLandscapingTools
             s_setting.RegisterInOptionsUI();
             AssetDatabase.global.LoadSettings("ELTSettings", s_setting, new ELTSettings(this));
 
-            Logger.Info(s_setting.GetOptionDescLocaleID("ClearDepletedFertilityResource"));
-            Logger.Info(s_setting.GetOptionFormatLocaleID("ClearDepletedFertilityResource"));
-
             updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
 
             EntityQueryDesc entityQueryDesc = new()

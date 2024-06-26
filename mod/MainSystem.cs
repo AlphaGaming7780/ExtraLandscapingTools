@@ -25,8 +25,6 @@ namespace ExtraLandscapingTools
             if(s_clearUsedOreResource || s_clearUsedOilResource || s_clearUsedOreResource)
             {
 
-                ELT.Logger.Info("yes");
-
                 NativeArray<NaturalResourceCell> NaturalResourceCells = _naturalResourceSystem.GetData(false, out JobHandle dependencies).m_Buffer;
                 JobHandle jobHandle = JobHandle.CombineDependencies(Dependency, dependencies);
                 
