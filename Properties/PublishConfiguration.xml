@@ -21,6 +21,7 @@ You can now add custom brushes to your game, check the wiki on the Github page o
 if you need help, ping me on discord @triton_supreme.
 
 ## Feature roadmap
+* ✔️ Refill used resources
 * ✔️ Custom brush
 * ✔️ Brush angle
 * ✔️ Ore, Oil, Underground water and fertile land tools
@@ -35,17 +36,17 @@ if you need help, ping me on discord @triton_supreme.
 
 # Translation
 ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
-- ✔️French 100% : Morgan Touverey Quilling (mtouverey)
-- ✔️Chinese Simplified 100% : RilkeXS(无手文) (RilkeXS)
+- ⚠️French 27% : Morgan Touverey Quilling (mtouverey)
+- ⚠️Chinese Simplified 27% : RilkeXS(无手文) (RilkeXS)
 - ❌Chinese Traditional 0%
-- ⚠️German 80%
+- ⚠️German 27% : xinatoras (realneoncatgaming)
 - ❌Italian 0%
 - ❌Japanese 0%
-- ✔️Korean 100% : Twotoolus-FLY-LShst, Hinanchovo
-- ✔️Polish 100% : Lisek
-- ❌Portuguese, Brazilian 0%
-- ⚠️Russian 20% : chromakeeeey
-- ✔️Spanish 100% : elGendo87
+- ⚠️Korean 27% : Twotoolus-FLY-LShst, Hinanchovo
+- ✔️Polish 100% : Lisek, karmel68
+- ⚠️Portuguese, Brazilian 27% : Miguel Pereira Campos (mpcamposz)
+- ⚠️Russian 27% : chromakeeeey, Mihail (kaktyc)
+- ✔️Spanish 100% : elGendo87, Alex (AlexofCA)
 
 # Community
 Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
@@ -69,10 +70,14 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<ChangeLog>
 # v1.3.0
 ## Features
-- Add button to refill all the used resource on the map.
+- Add buttons to refill all the used resource on the map.
 
 ## Translation
-
+- Polish : karmel68
+- Spanish : elGendo87
+- Russian : Mihail (kaktyc)
+- Portuguese, Brazilian : Miguel Pereira Campos (mpcamposz)
+- German : xinatoras (realneoncatgaming)
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extralandscapingtools" />
