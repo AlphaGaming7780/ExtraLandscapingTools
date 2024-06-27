@@ -7,7 +7,7 @@
   "Assets.DESCRIPTION[GroundWater Resource Tool]": "GroundWater Resource Tool",
   "Options.SECTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT]": "Extra Landscaping Tools",
   "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Refill depleted fertile resources",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Refill depleted fertility resources on all the map.",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Refill depleted fertile resources on all the map.",
   "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Refill depleted ore resources",
   "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Refill depleted ore resources on all the map.",
   "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Refill depleted oil resources",
