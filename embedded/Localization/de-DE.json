@@ -6,10 +6,10 @@
   "Assets.DESCRIPTION[FertileLand Resource Tool]": "Fruchtbares Land-Ressourcenwerkzeug",
   "Assets.DESCRIPTION[GroundWater Resource Tool]": "Grundwasser-Ressourcenwerkzeug",
   "Options.SECTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT]": "Extra Landscaping Tools",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Refill depleted fertile resources",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Refill depleted fertile resources on all the map.",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Refill depleted ore resources",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Refill depleted ore resources on all the map.",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Refill depleted oil resources",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Refill depleted oil resources on all the map."
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Erschöpfte Fruchtbarkeit wiederherstellen",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Stellt die Fruchtbarkeit auf der ganzen Karte wieder her.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Erschöpfte Erzressourcen auffüllen",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Füllt alle Erzvorkommen auf der Karte wieder auf.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Erschöpfte Ölvorkommen auffüllen",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Füllt alle Ölvorkommen auf der Karte wieder auf."
 }
