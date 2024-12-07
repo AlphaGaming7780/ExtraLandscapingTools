@@ -36,16 +36,17 @@ if you need help, ping me on discord @triton_supreme.
 
 # Translation
 ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
-- ⚠️French 27% : Morgan Touverey Quilling (mtouverey)
-- ⚠️Chinese Simplified 27% : RilkeXS(无手文) (RilkeXS)
-- ❌Chinese Traditional 0%
-- ⚠️German 27% : xinatoras (realneoncatgaming)
-- ❌Italian 0%
+- ✔️French 100% : Morgan Touverey Quilling (mtouverey), spooky_off
+- ✔️Chinese Simplified 100% : RilkeXS(无手文) (RilkeXS), CBEdwin
+- ✔️Chinese Traditional 100% : 阿兩 (nova1529)
+- ✔️German 100% : xinatoras (realneoncatgaming), Jakob (Hendrix_)
+- ✔️Italian 100% : Piccolo_Opossum
 - ❌Japanese 0%
-- ⚠️Korean 27% : Twotoolus-FLY-LShst, Hinanchovo
+- ✔️Korean 100% : Twotoolus-FLY-LShst, Hinanchovo
 - ✔️Polish 100% : Lisek, karmel68
+- ✔️Portuguese 100% -> [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
 - ⚠️Portuguese, Brazilian 27% : Miguel Pereira Campos (mpcamposz)
-- ⚠️Russian 27% : chromakeeeey, Mihail (kaktyc)
+- ✔️Russian 100% : chromakeeeey, Mihail (kaktyc), Sergey Rogatnev (rogatnev.sergey), Richard "Katsumoto" (Katsumoto), Sergey (TraceXR)
 - ✔️Spanish 100% : elGendo87, Alex (AlexofCA)
 
 # Community
@@ -60,7 +61,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extralandscapingtools.1647852/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.3.0" />
+	<ModVersion Value="1.3.1" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.1.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -68,16 +69,20 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-# v1.3.0
-## Features
-- Add buttons to refill all the used resource on the map.
+# v1.3.1
+# Fixes
+- UI bug for the brush rotation.
 
-## Translation
-- Polish : karmel68
-- Spanish : elGendo87
-- Russian : Mihail (kaktyc)
-- Portuguese, Brazilian : Miguel Pereira Campos (mpcamposz)
-- German : xinatoras (realneoncatgaming)
+# Translations update
+- ✔️French 100% : Morgan Touverey Quilling (mtouverey), spooky_off
+- ✔️Chinese Simplified 100% : RilkeXS(无手文) (RilkeXS), CBEdwin
+- ✔️Chinese Traditional 100% : 阿兩 (nova1529)
+- ✔️German 100% : Jakob (Hendrix_)
+- ✔️Italian 100% : Piccolo_Opossum
+- ✔️Portuguese 100% -> [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
+- ⚠️Portuguese, Brazilian 27%
+- ✔️Russian 100% : chromakeeeey, Sergey Rogatnev (rogatnev.sergey), Richard "Katsumoto" (Katsumoto), Sergey (TraceXR)
+- ✔️Spanish 100% : elGendo87, Alex (AlexofCA)
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extralandscapingtools" />

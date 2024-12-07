@@ -31,7 +31,7 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 			return entityKey(selectedBrush)
 		}
 
-		var dropdownToggle = DropdownToggle({style: {"width": "80%"}, children: GetSelectedBrushName()})
+		var dropdownToggle = DropdownToggle({style: {maxWidth: "175rem"}, children: GetSelectedBrushName()})
 		
 		var dropDown = Dropdown({focusKey: FOCUS_DISABLED$, theme: {dropdownToggle: "picker-toggle_d6k", dropdownPopup: "picker-popup_pUb", dropdownMenu: "", dropdownItem: "list-item_qRg item_H00", scrollable: "item-picker_ORP"}, content: reactNode, children: dropdownToggle})
 
@@ -91,7 +91,7 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 		var sliderPropsSection : PropsSection = {
 			title: translate("Toolbar.BRUSH_ROTATION"),
 			children: [
-				<div className="slider-container_Q_K" style={{width:"27.5%"}}>{Slider(propsSlider)}</div>,
+				<div className="slider-container_Q_K" style={{maxWidth:"110rem"}}>{Slider(propsSlider)}</div>,
 				TextInput(propsTextInput)
 			]
 		}
