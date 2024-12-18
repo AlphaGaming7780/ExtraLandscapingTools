@@ -1,15 +1,15 @@
 {
-  "Toolbar.BRUSH": "Brush",
-  "Toolbar.BRUSH_ROTATION": "Brush Rotation",
-  "Assets.DESCRIPTION[Ore Resource Tool]": "Ore Resource Tool",
-  "Assets.DESCRIPTION[Oil Resource Tool]": "Oil Resource Tool",
-  "Assets.DESCRIPTION[FertileLand Resource Tool]": "FertileLand Resource Tool",
-  "Assets.DESCRIPTION[GroundWater Resource Tool]": "GroundWater Resource Tool",
-  "Options.SECTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT]": "Extra Landscaping Tools",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Refill depleted fertile resources",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "Refill depleted fertile resources on all the map.",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Refill depleted ore resources",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Refill depleted ore resources on all the map.",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Refill depleted oil resources",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Refill depleted oil resources on all the map."
+  "Toolbar.BRUSH": "ブラシ",
+  "Toolbar.BRUSH_ROTATION": "ブラシ回転",
+  "Assets.DESCRIPTION[Ore Resource Tool]": "鉱石資源ツール",
+  "Assets.DESCRIPTION[Oil Resource Tool]": "石油資源ツール",
+  "Assets.DESCRIPTION[FertileLand Resource Tool]": "肥沃な土地資源ツール",
+  "Assets.DESCRIPTION[GroundWater Resource Tool]": "地下水資源ツール",
+  "Options.SECTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT]": "その他の造園ツール",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "枯渇した肥沃な土地資源を補充する",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "マップにある全ての枯渇した肥沃な土地資源を補充する",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "枯渇した鉱石資源を補充する",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "マップにある全ての枯渇した鉱石資源を補充する",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "枯渇した石油資源を補充する",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "マップにある全ての枯渇した石油資源を補充する"
 }
