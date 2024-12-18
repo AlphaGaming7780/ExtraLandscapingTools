@@ -60,7 +60,8 @@ namespace ExtraLandscapingTools
 
 			ExtraLocalization.LoadLocalization(Logger, Assembly.GetExecutingAssembly(), false);
 			ExtraLib.AddOnEditEnities(new(OnEditEntities, entityQueryDesc));
-			ExtraLib.AddOnMainMenu(OnMainMenu);
+
+			ExtraLib.AddOnInitialize(Initialize);
 
 			//harmony = new($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
 			//harmony.PatchAll(typeof(ELT).Assembly);
@@ -82,9 +83,10 @@ namespace ExtraLandscapingTools
 			return Assembly.GetExecutingAssembly().GetManifestResourceStream("ExtraLandscapingTools.embedded."+embeddedPath);
 		}
 
-		private void OnMainMenu() {
+		private void Initialize()
+		{
 			ExtraLib.extraLibMonoScript.StartCoroutine(CustomBrushes.LoadCustomBrushes());
-		}
+        }
 
 		private void OnEditEntities(NativeArray<Entity> entities)
 		{   

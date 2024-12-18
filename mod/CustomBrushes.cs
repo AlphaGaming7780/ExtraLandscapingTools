@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Colossal.PSI.Common;
 using Extra.Lib;
+using Extra.Lib.Helper;
 using Game.Prefabs;
 using UnityEngine;
 
@@ -51,11 +52,17 @@ namespace ExtraLandscapingTools
 
                     byte[] fileData = File.ReadAllBytes(filePath);
                     Texture2D texture2D = new(1, 1);
-                    if (!texture2D.LoadImage(fileData)) ELT.Logger.Warn($"Filded to load {name}.");
+                    if (!texture2D.LoadImage(fileData))
+                    {
+                        ELT.Logger.Warn($"Filded to load {name}.");
+                        UnityEngine.Object.Destroy(texture2D);
+                    }
+
+                    TextureHelper.Format(ref texture2D, TextureFormat.Alpha8);
 
                     BrushPrefab brushPrefab = (BrushPrefab)ScriptableObject.CreateInstance("BrushPrefab");
                     brushPrefab.name = name;
-                    brushPrefab.m_Texture = texture2D.Format(TextureFormat.Alpha8);
+                    brushPrefab.m_Texture = texture2D;
                     ExtraLib.m_PrefabSystem.AddPrefab(brushPrefab);
                     curentIndex++;
                 }
