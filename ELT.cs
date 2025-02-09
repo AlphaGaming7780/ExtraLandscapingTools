@@ -4,23 +4,26 @@ using Game.Modding;
 using Game.SceneFlow;
 using Unity.Entities;
 using Unity.Collections;
-using Extra.Lib;
-using Extra.Lib.Debugger;
-using Extra.Lib.Helper;
-using System.Linq;
+using HarmonyLib;
 using System.IO;
 using System.Reflection;
 using Colossal.PSI.Environment;
-using UnityEngine;
-using Extra.Lib.Localization;
 using Game.Prefabs;
-using Logger = Extra.Lib.Debugger.Logger;
 using Colossal.IO.AssetDatabase;
-using Game.Settings;
+
+using ExtraLib;
+using ExtraLib.Helpers;
+using ExtraLib.ClassExtension;
+using Logger = ExtraLib.Debugger.Logger;
+
+using ExtraLandscapingTools.Systems;
+using ExtraLandscapingTools.Systems.Tools;
+using System.Linq;
+
 
 namespace ExtraLandscapingTools
 {
-	public class ELT : IMod
+    public class ELT : IMod
 	{
         internal static ELTSettings s_setting;
 		internal static ILog log = LogManager.GetLogger($"{nameof(ExtraLandscapingTools)}").SetShowsErrorsInUI(false);
@@ -29,8 +32,8 @@ namespace ExtraLandscapingTools
 #else
 		internal static Logger Logger = new(log, false);
 #endif
-        //private Harmony harmony;
-        public void OnLoad(UpdateSystem updateSystem)
+        private Harmony harmony;
+		public void OnLoad(UpdateSystem updateSystem)
 		{
             Logger.Info(nameof(OnLoad));
 
@@ -52,6 +55,8 @@ namespace ExtraLandscapingTools
             AssetDatabase.global.LoadSettings("ELTSettings", s_setting, new ELTSettings(this));
 
             updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
+            updateSystem.UpdateAt<GrassToolSystem>(SystemUpdatePhase.ToolUpdate);
+            updateSystem.UpdateAt<VegetationRenderSystem>(SystemUpdatePhase.PreCulling);
 
             EntityQueryDesc entityQueryDesc = new()
 			{
@@ -59,24 +64,24 @@ namespace ExtraLandscapingTools
 			};
 
 			ExtraLocalization.LoadLocalization(Logger, Assembly.GetExecutingAssembly(), false);
-			ExtraLib.AddOnEditEnities(new(OnEditEntities, entityQueryDesc));
+			EL.AddOnEditEnities(new(OnEditEntities, entityQueryDesc));
 
-			ExtraLib.AddOnInitialize(Initialize);
+            EL.AddOnInitialize(Initialize);
 
-			//harmony = new($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
-			//harmony.PatchAll(typeof(ELT).Assembly);
-			//var patchedMethods = harmony.GetPatchedMethods().ToArray();
-			//Logger.Info($"Plugin ExtraLandscapingTools made patches! Patched methods: " + patchedMethods.Length);
-			//foreach (var patchedMethod in patchedMethods)
-			//{
-			//	Logger.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
-			//}
+			harmony = new($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
+			harmony.PatchAll(typeof(ELT).Assembly);
+			var patchedMethods = harmony.GetPatchedMethods().ToArray();
+			Logger.Info($"Plugin ExtraLandscapingTools made patches! Patched methods: " + patchedMethods.Length);
+			foreach (var patchedMethod in patchedMethods)
+			{
+				Logger.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
+			}
 		}
 
 		public void OnDispose()
 		{
             Logger.Info(nameof(OnDispose));
-			//harmony.UnpatchAll($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
+			harmony.UnpatchAll($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
 		}
 
 		internal static Stream GetEmbedded(string embeddedPath) {
@@ -85,14 +90,14 @@ namespace ExtraLandscapingTools
 
 		private void Initialize()
 		{
-			ExtraLib.extraLibMonoScript.StartCoroutine(CustomBrushes.LoadCustomBrushes());
+            EL.extraLibMonoScript.StartCoroutine(CustomBrushes.LoadCustomBrushes());
         }
 
 		private void OnEditEntities(NativeArray<Entity> entities)
 		{   
 			
 			foreach(Entity entity in entities) {
-				if(ExtraLib.m_PrefabSystem.TryGetPrefab(entity, out TerraformingPrefab prefab)) {
+				if(EL.m_PrefabSystem.TryGetPrefab(entity, out TerraformingPrefab prefab)) {
 
 					if(prefab.m_Target == TerraformingTarget.Material) continue;
 
@@ -109,8 +114,8 @@ namespace ExtraLandscapingTools
 					TerraformingUI.m_Group?.RemoveElement(entity);
 					TerraformingUI.m_Group = PrefabsHelper.GetUIAssetCategoryPrefab("Terraforming");
 					TerraformingUI.m_Group.AddElement(entity);
-					
-					ExtraLib.m_EntityManager.AddOrSetComponentData(entity, TerraformingUI.ToComponentData());
+
+                    EL.m_EntityManager.AddOrSetComponentData(entity, TerraformingUI.ToComponentData());
 				}
 			}
 		}
