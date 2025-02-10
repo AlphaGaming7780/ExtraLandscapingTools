@@ -53,7 +53,7 @@ namespace ExtraLandscapingTools.Systems.Tools
 
         public override string toolID => "Grass Tool";
 
-        public GrassPrefab prefab { get; private set; }
+        public GrassPrefabBase prefab { get; private set; }
 
         public override PrefabBase GetPrefab()
         {
@@ -62,7 +62,7 @@ namespace ExtraLandscapingTools.Systems.Tools
 
         public override bool TrySetPrefab(PrefabBase prefab)
         {
-            GrassPrefab grassPrefab = prefab as GrassPrefab;
+            GrassPrefabBase grassPrefab = prefab as GrassPrefabBase;
             if (grassPrefab != null)
             {
                 this.SetPrefab(grassPrefab);
@@ -71,7 +71,7 @@ namespace ExtraLandscapingTools.Systems.Tools
             return false;
         }
 
-        public void SetPrefab(GrassPrefab value)
+        public void SetPrefab(GrassPrefabBase value)
         {
             this.prefab = value;
         }
@@ -102,7 +102,7 @@ namespace ExtraLandscapingTools.Systems.Tools
 
             base.brushSize = 100f;
             base.brushAngle = 0f;
-            base.brushStrength = 0.5f;
+            base.brushStrength = 1f;
 
             // Fix for the Grass prefab, because it has to be a child of ObjectPrefab because BrushRenderSystem as weird code and use a null material otherwise.
             ToolSystem toolSystem = World.GetOrCreateSystemManaged<ToolSystem>();
@@ -119,7 +119,7 @@ namespace ExtraLandscapingTools.Systems.Tools
             base.brushType = FindDefaultBrush(this.m_BrushQuery);
             base.brushSize = 100f;
             base.brushAngle = 0f;
-            base.brushStrength = 0.5f;
+            base.brushStrength = 1f;
         }
         protected override void OnStartRunning()
         {

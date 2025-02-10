@@ -31,6 +31,8 @@ using ExtraLib.Helpers;
 using Colossal.PSI.Environment;
 using System.IO;
 using Unity.Burst;
+using ExtraLandscapingTools.MOD.Prefabs;
+using Game.Rendering.Utilities;
 
 namespace ExtraLandscapingTools.Systems
 {
@@ -46,8 +48,12 @@ namespace ExtraLandscapingTools.Systems
         private VisualEffect m_FoliageVFX;
 
         private Texture2D m_UserPaintedGrassTexture;
+        private Texture m_GrassBaseColorMap;
+        private Texture m_GrassNormalMap;
 
         private EntityQuery m_BrushQuery;
+
+        bool updated = false;
 
         protected override void OnCreate()
         {
@@ -56,6 +62,14 @@ namespace ExtraLandscapingTools.Systems
             m_TerrainMaterialSystem = World.GetOrCreateSystemManaged<TerrainMaterialSystem>();
             m_PrefabSystem = World.GetOrCreateSystemManaged<PrefabSystem>();
             VegetationRenderSystem.s_FoliageVFXAsset = Resources.Load<VisualEffectAsset>("Vegetation/FoliageVFX");
+
+            List<VFXExposedProperty> v = new();
+            s_FoliageVFXAsset.GetExposedProperties(v);
+
+            foreach (VFXExposedProperty property in v)
+            {
+                ELT.Logger.Info($"{property.name} : {property.type}");
+            }
 
             m_UserPaintedGrassTexture = new Texture2D(TerrainSystem.kDefaultHeightmapWidth, TerrainSystem.kDefaultHeightmapHeight, TextureFormat.RG16, false, true)
             {
@@ -66,6 +80,10 @@ namespace ExtraLandscapingTools.Systems
             Color[] pixels = Enumerable.Repeat(Color.black, m_UserPaintedGrassTexture.width * m_UserPaintedGrassTexture.height).ToArray();
             m_UserPaintedGrassTexture.SetPixels(pixels);
             m_UserPaintedGrassTexture.Apply();
+
+            m_GrassBaseColorMap = new Texture2D(2048, 1024, TextureFormat.RGBA32, true, true);
+            m_GrassNormalMap = new Texture2D(2048, 1024, TextureFormat.RGBA32, true, true);
+
 
             m_BrushQuery = GetEntityQuery(new ComponentType[]
             {
@@ -113,7 +131,14 @@ namespace ExtraLandscapingTools.Systems
                     Texture2D texture = brushPrefab.m_Texture;
                     Bounds2 brushArea = ToolUtils.GetBounds(brush);
                     TerrainHeightData terrainHeightData = m_TerrainSystem.GetHeightData();
-                    TextureStruct<ColorA8> brushTexture = GetTextureFromTexture2D<ColorA8>(texture);
+                    //ELT.Logger.Info($"brush texture format : {texture.format} | {texture.graphicsFormat}");
+                    //TextureStruct<ColorDXT5> brushTexture = GetTextureFromTexture2D<ColorDXT5>(texture);
+                    TextureStruct<Color32> brushTexture = new()
+                    {
+                        data = new NativeArray<Color32>(texture.GetPixels32(), Allocator.TempJob),
+                        width = texture.width,
+                        height = texture.height
+                    };
                     TextureStruct<ColorRG8> userPaintedGrassTexture = GetTextureFromTexture2D<ColorRG8>(m_UserPaintedGrassTexture);
 
                     UpdateUserPaintedGrass updateUserPaintedGrass = new UpdateUserPaintedGrass()
@@ -129,6 +154,7 @@ namespace ExtraLandscapingTools.Systems
                     JobHandle jobHandle = updateUserPaintedGrass.Schedule(Dependency);
 
                     jobHandle.Complete();
+                    brushTexture.Dispose();
                     //m_UserPaintedGrassTexture.SetPixels(userPaintedGrassTexture.data.ToArray());
                     m_UserPaintedGrassTexture.Apply(false);
                     //TextureHelper.SaveTextureAsPNG(m_UserPaintedGrassTexture, Path.Combine(EnvPath.kUserDataPath, "ModsData", nameof(ExtraLandscapingTools), "TEST.png" ));
@@ -140,24 +166,100 @@ namespace ExtraLandscapingTools.Systems
 
                 this.CreateDynamicVFXIfNeeded();
                 this.UpdateEffect();
+                //this.UpdateEffectNew();
             }
         }
 
         private void UpdateEffect()
         {
+            if (!m_PrefabSystem.TryGetPrefab(new PrefabID(nameof(GrassPrefab), "GrassPrefab"), out PrefabBase prefabBase) || prefabBase is not GrassPrefab grassPrefab) return;
+
+
             Bounds terrainBounds = this.m_TerrainSystem.GetTerrainBounds();
             this.m_FoliageVFX.SetVector3("TerrainBounds_center", terrainBounds.center);
             this.m_FoliageVFX.SetVector3("TerrainBounds_size", terrainBounds.size);
             this.m_FoliageVFX.SetTexture("Terrain HeightMap", this.m_TerrainSystem.heightmap);
             //this.m_FoliageVFX.SetTexture("Terrain SplatMap", this.m_TerrainMaterialSystem.splatmap);
             this.m_FoliageVFX.SetTexture("Terrain SplatMap", m_UserPaintedGrassTexture);
+            //this.m_FoliageVFX.SetCheckedTexture(23, this.m_TerrainMaterialSystem.splatmap);
+            //if (!this.m_FoliageVFX.SetCheckedTexture(Shader.PropertyToID("Terrain SplatMap"), m_UserPaintedGrassTexture)) ELT.Logger.Warn($"Failed to set {Shader.PropertyToID("Terrain SplatMap")}.");
+            //if (m_GrassBaseColorMap != null) if (!this.m_FoliageVFX.SetCheckedTexture(Shader.PropertyToID("baseColorMap"), m_GrassBaseColorMap)) ELT.Logger.Warn("Failed to set 57.");
+            //if (m_GrassNormalMap != null) if (!this.m_FoliageVFX.SetCheckedTexture(Shader.PropertyToID("normalMap"), m_GrassNormalMap)) ELT.Logger.Warn("Failed to set 58.");
+
             Vector4 globalVector = Shader.GetGlobalVector("colossal_TerrainScale");
             Vector4 globalVector2 = Shader.GetGlobalVector("colossal_TerrainOffset");
             this.m_FoliageVFX.SetVector4("Terrain Offset Scale", new Vector4(globalVector.x, globalVector.z, globalVector2.x, globalVector2.z));
             this.m_FoliageVFX.SetVector3("CameraPosition", this.m_CameraUpdateSystem.position);
             this.m_FoliageVFX.SetVector3("CameraDirection", this.m_CameraUpdateSystem.direction);
+
+            this.m_FoliageVFX.SetVector2("Crop Size", grassPrefab.CropSize);
+            this.m_FoliageVFX.SetFloat("FoliageCoverage", grassPrefab.FoliageCoverage > 0 ? grassPrefab.FoliageCoverage : 1);
+            this.m_FoliageVFX.SetAnimationCurve("Scale Over Distance", grassPrefab.ScaleOverDistance);
             //Texture2D tex = TextureHelper.GetTexture2DFromTexture(this.m_TerrainMaterialSystem.splatmap, TextureFormat.RG16);
             //if (tex != null) TextureHelper.SaveTextureAsPNG(tex, Path.Combine(EDT.ResourcesIcons, "TEST.PNG"));
+        }
+
+        private void UpdateEffectNew()
+        {
+            if (!m_PrefabSystem.TryGetPrefab(new PrefabID(nameof(GrassPrefabNew), "GrassPrefabNew"), out PrefabBase prefabBase) || prefabBase is not GrassPrefabNew grassPrefab) return;
+
+            if(grassPrefab.Grass_Enabled != updated)
+            {
+                ELT.Logger.Info("GrassPrefab has been updated");
+                updated = grassPrefab.Grass_Enabled;
+            }
+
+
+            Bounds terrainBounds = this.m_TerrainSystem.GetTerrainBounds();
+
+            this.m_FoliageVFX.SetVector3    ("CameraPosition", this.m_CameraUpdateSystem.position);
+            this.m_FoliageVFX.SetVector3    ("CameraDirection", this.m_CameraUpdateSystem.direction);
+            this.m_FoliageVFX.SetBool       ("DebugDistantGrass", grassPrefab.DebugDistantGrass);
+            this.m_FoliageVFX.SetBool       ("DebugGrassLOD", grassPrefab.DebugGrassLOD);
+            this.m_FoliageVFX.SetTexture    ("Grass_BaseColorMap", m_GrassBaseColorMap);
+            this.m_FoliageVFX.SetVector4    ("Grass_ColorRandom1", grassPrefab.Grass_ColorRandom1);
+            this.m_FoliageVFX.SetVector4    ("Grass_ColorRandom2", grassPrefab.Grass_ColorRandom2);
+            this.m_FoliageVFX.SetFloat      ("Grass_Coverage", grassPrefab.Grass_Coverage);
+            this.m_FoliageVFX.SetBool       ("Grass_Enabled", grassPrefab.Grass_Enabled);
+            this.m_FoliageVFX.SetVector2    ("Grass_FlipBookSize", grassPrefab.Grass_FlipBookSize);
+            this.m_FoliageVFX.SetFloat      ("Grass_LOD0CullDistance", grassPrefab.Grass_LOD0CullDistance);
+            this.m_FoliageVFX.SetFloat      ("Grass_LOD0ParticleCount", grassPrefab.Grass_LOD0ParticleCount);
+            this.m_FoliageVFX.SetFloat      ("Grass_LOD1CullDistance", grassPrefab.Grass_LOD1CullDistance);
+            this.m_FoliageVFX.SetFloat      ("Grass_LOD1ParticleCount", grassPrefab.Grass_LOD1ParticleCount);
+            this.m_FoliageVFX.SetFloat      ("Grass_LOD2CullDistance", grassPrefab.Grass_LOD2CullDistance);
+            this.m_FoliageVFX.SetFloat      ("Grass_LOD2ParticleCount", grassPrefab.Grass_LOD2ParticleCount);
+            this.m_FoliageVFX.SetFloat      ("Grass_NoiseScale", grassPrefab.Grass_NoiseScale);
+            //this.m_FoliageVFX.SetTexture    ("Grass_NormalMap", grassPrefab.Grass_NormalMap);
+            this.m_FoliageVFX.SetFloat      ("Grass_NormalScale", grassPrefab.Grass_NormalScale);
+            this.m_FoliageVFX.SetVector2    ("Grass_QuadSize", grassPrefab.Grass_QuadSize);
+            this.m_FoliageVFX.SetFloat      ("Grass_ScaleMultiplier", grassPrefab.Grass_ScaleMultiplier);
+            this.m_FoliageVFX.SetFloat      ("Grass_ScaleRandom", grassPrefab.Grass_ScaleRandom);
+            this.m_FoliageVFX.SetInt        ("Grass_SplatIndex1", grassPrefab.Grass_SplatIndex1);
+            this.m_FoliageVFX.SetInt        ("Grass_SplatIndex2", grassPrefab.Grass_SplatIndex2);
+            this.m_FoliageVFX.SetInt        ("Grass_SplatIndex3", grassPrefab.Grass_SplatIndex3);
+            this.m_FoliageVFX.SetInt        ("Grass_SplatIndex4", grassPrefab.Grass_SplatIndex4);
+            this.m_FoliageVFX.SetInt        ("Grass_SplatIndex5", grassPrefab.Grass_SplatIndex5);
+            this.m_FoliageVFX.SetInt        ("Grass_SplatIndex6", grassPrefab.Grass_SplatIndex6);
+            this.m_FoliageVFX.SetInt        ("Grass_SplatIndex7", grassPrefab.Grass_SplatIndex7);
+            this.m_FoliageVFX.SetInt        ("Grass_SplatIndex8", grassPrefab.Grass_SplatIndex8);
+            this.m_FoliageVFX.SetInt        ("Grass_SplatIndex9", grassPrefab.Grass_SplatIndex9);
+            this.m_FoliageVFX.SetInt        ("Grass_SplatIndex10", grassPrefab.Grass_SplatIndex10);
+            this.m_FoliageVFX.SetVector2    ("Grass_YAngleRange", grassPrefab.Grass_YAngleRange);
+            this.m_FoliageVFX.SetTexture    ("Heightmap", this.m_TerrainSystem.heightmap);
+            this.m_FoliageVFX.SetFloat      ("Heightmap_SamplingScale", grassPrefab.Heightmap_SamplingScale);
+            this.m_FoliageVFX.SetFloat      ("HeightmapYScale", grassPrefab.HeightmapYScale);
+            this.m_FoliageVFX.SetBool       ("IndexOverride", grassPrefab.IndexOverride);
+
+            this.m_FoliageVFX.SetBool       ("Scatter1_Enabled", grassPrefab.Scatter_Enabled);
+
+            //this.m_FoliageVFX.SetTexture("Splatmap", m_UserPaintedGrassTexture);
+            this.m_FoliageVFX.SetTexture    ("Splatmap", this.m_TerrainMaterialSystem.splatmap);
+            this.m_FoliageVFX.SetFloat      ("Splatmap_SamplingScale", grassPrefab.Splatmap_SamplingScale);
+            this.m_FoliageVFX.SetFloat      ("Splatmap_WeightBlendStrength", grassPrefab.Splatmap_WeightBlendStrength);
+            this.m_FoliageVFX.SetVector3    ("TerrainBounds_center", terrainBounds.center);
+            this.m_FoliageVFX.SetVector3    ("TerrainBounds_size", terrainBounds.size);
+            this.m_FoliageVFX.SetVector3    ("VolumeScale", grassPrefab.VolumeScale);
+
         }
 
         private void CreateDynamicVFXIfNeeded()
@@ -211,9 +313,10 @@ namespace ExtraLandscapingTools.Systems
             public byte r, g;
         }
 
-        private struct ColorA8
+        private struct ColorDXT5
         {
-            public byte a;
+            public ulong a;
+            public ulong color;
         }
 
         private struct TextureStruct<T> where T : struct
@@ -285,7 +388,7 @@ namespace ExtraLandscapingTools.Systems
         private struct UpdateUserPaintedGrass : IJob
         {
             [ReadOnly]
-            public TextureStruct<ColorA8> brushTexture;
+            public TextureStruct<Color32> brushTexture;
 
             public TextureStruct<ColorRG8> userPaintedGrassTexture;
 
@@ -321,6 +424,9 @@ namespace ExtraLandscapingTools.Systems
                     {
                         int2 brushTexturePos = new int2( (int)Math.Round(x * areaToTextureScale.x) , (int)Math.Round(y * areaToTextureScale.y));
                         int2 userTexturePos = new int2((int)Math.Round(brushHeightMapArea.min.x) + x, (int)Math.Round(brushHeightMapArea.min.y) + y);
+
+                        if (userTexturePos.x < 0 || userTexturePos.x > 4095 || userTexturePos.y < 0 || userTexturePos.y > 4095) continue;
+
                         ColorRG8 color = userPaintedGrassTexture.GetValue(userTexturePos);
 
                         int val;
@@ -328,14 +434,16 @@ namespace ExtraLandscapingTools.Systems
                         {
                             case Tools.GrassToolSystem.State.Adding:
                                 //val = (int)Math.Round(color.g + brushTexture.GetValue(brushTexturePos).a / 255 * brush.m_Strength);
-                                //color.g = val > 255 ? (byte)255 : (byte)val;
-                                color.g = brushTexture.GetValue(brushTexturePos).a > 200 ? (byte)255 : color.g;
+                                val = color.g + (int)Math.Round(brushTexture.GetValue(brushTexturePos).a * brush.m_Strength);
+                                color.g = val > 255 ? (byte)255 : (byte)val;
+                                //color.g = brushTexture.GetValue(brushTexturePos).a;
                                 break;
                             case Tools.GrassToolSystem.State.Removing:
                                 //color.g = color.g - brushTexture.GetValue(brushTexturePos).a * brush.m_Strength;
                                 //val = (int)Math.Round(color.g - brushTexture.GetValue(brushTexturePos).a / 255 * brush.m_Strength);
-                                //color.g = val < 0 ? (byte)0 : (byte)val;
-                                color.g = brushTexture.GetValue(brushTexturePos).a > 200 ? (byte)0 : color.g;
+                                val = color.g - (int)Math.Round(brushTexture.GetValue(brushTexturePos).a * brush.m_Strength);
+                                color.g = val < 0 ? (byte)0 : (byte)val;
+                                //color.g = brushTexture.GetValue(brushTexturePos).a > 200 ? (byte)0 : color.g;
                                 break;
                         }
                         
