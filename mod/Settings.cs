@@ -5,6 +5,7 @@ using Game.Settings;
 namespace ExtraLandscapingTools
 {
     //[FileLocation($"ModsSettings\\{nameof(ExtraLandscapingTools)}\\settings")]
+    [FileLocation("ExtraLandscapingTools")]
     internal class ELTSettings : ModSetting
     {
         public ELTSettings(IMod mod) : base(mod) { }
