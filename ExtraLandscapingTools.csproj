@@ -64,6 +64,10 @@
 		<None Include="$(ModTargetsFile)" Link="Properties\Mod.targets" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="MOD\Prefabs\" />
+	</ItemGroup>
+
 	<Target Name="BuildUI" BeforeTargets="AfterBuild">
 		<Exec Command="npm run build" WorkingDirectory="$(ProjectDir)/UI" />
 	</Target>

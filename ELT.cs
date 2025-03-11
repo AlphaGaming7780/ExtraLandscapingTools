@@ -1,24 +1,21 @@
-﻿using Colossal.Logging;
+﻿using Colossal.IO.AssetDatabase;
+using Colossal.Logging;
+using Colossal.PSI.Environment;
+using ExtraLandscapingTools.Systems;
+using ExtraLib;
+using ExtraLib.ClassExtension;
+using ExtraLib.Helpers;
 using Game;
 using Game.Modding;
+using Game.Prefabs;
 using Game.SceneFlow;
-using Unity.Entities;
-using Unity.Collections;
 using HarmonyLib;
 using System.IO;
-using System.Reflection;
-using Colossal.PSI.Environment;
-using Game.Prefabs;
-using Colossal.IO.AssetDatabase;
-
-using ExtraLib;
-using ExtraLib.Helpers;
-using ExtraLib.ClassExtension;
-using Logger = ExtraLib.Debugger.Logger;
-
-using ExtraLandscapingTools.Systems;
-using ExtraLandscapingTools.Systems.Tools;
 using System.Linq;
+using System.Reflection;
+using Unity.Collections;
+using Unity.Entities;
+using Logger = ExtraLib.Debugger.Logger;
 
 
 namespace ExtraLandscapingTools
@@ -55,8 +52,6 @@ namespace ExtraLandscapingTools
             AssetDatabase.global.LoadSettings("ELTSettings", s_setting, new ELTSettings(this));
 
             updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
-            updateSystem.UpdateAt<GrassToolSystem>(SystemUpdatePhase.ToolUpdate);
-            updateSystem.UpdateAt<VegetationRenderSystem>(SystemUpdatePhase.PreCulling);
 
             EntityQueryDesc entityQueryDesc = new()
 			{
