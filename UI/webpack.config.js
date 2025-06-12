@@ -12,7 +12,7 @@ if (!CSII_USERDATAPATH) {
 }
 
 const OUTPUT_DIR = `..\\bin\\UI`;
- //const OUTPUT_DIR = `${CSII_USERDATAPATH}\\Mods\\${MOD.id}`;
+//const OUTPUT_DIR = `${CSII_USERDATAPATH}\\Mods\\${MOD.id}`;
 
 const banner = `
  * Cities: Skylines II UI Module
