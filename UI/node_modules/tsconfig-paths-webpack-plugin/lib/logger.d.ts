@@ -1,6 +1,6 @@
 import { Options } from "./options";
 import { Chalk } from "chalk";
-export declare type LoggerFunc = (message: string) => void;
+export type LoggerFunc = (message: string) => void;
 export interface Logger {
     log: LoggerFunc;
     logInfo: LoggerFunc;

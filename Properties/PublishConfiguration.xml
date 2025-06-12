@@ -61,7 +61,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extralandscapingtools.1647852/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.3.4" />
+	<ModVersion Value="1.3.5" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.2.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -69,10 +69,8 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-## Fixes
-- Fixes for 1.2.5f1 game update.
-## Translation
-- ✔️Portuguese 100% : Tiago Correia (ti4go)
+### Fixes
+- Fixes for 1.3.3f1 game update.
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extralandscapingtools" />
