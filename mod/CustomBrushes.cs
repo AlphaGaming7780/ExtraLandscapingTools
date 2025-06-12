@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Colossal.PSI.Common;
-using Extra.Lib;
-using Extra.Lib.Helper;
+using ExtraLib;
+using ExtraLib.Helpers;
 using Game.Prefabs;
 using UnityEngine;
 
@@ -30,7 +30,7 @@ namespace ExtraLandscapingTools
                 numberOfBrushes += Directory.GetFiles(folder).Length;
             }
 
-            var notificationInfo = ExtraLib.m_NotificationUISystem.AddOrUpdateNotification(
+            var notificationInfo = EL.m_NotificationUISystem.AddOrUpdateNotification(
                 $"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}.{nameof(CustomBrushes)}",
                 title: "ELT, Loading the custom brushes.",
                 progressState: ProgressState.Indeterminate,
@@ -63,12 +63,12 @@ namespace ExtraLandscapingTools
                     BrushPrefab brushPrefab = (BrushPrefab)ScriptableObject.CreateInstance("BrushPrefab");
                     brushPrefab.name = name;
                     brushPrefab.m_Texture = texture2D;
-                    ExtraLib.m_PrefabSystem.AddPrefab(brushPrefab);
+                    EL.m_PrefabSystem.AddPrefab(brushPrefab);
                     curentIndex++;
                 }
             }
 
-            ExtraLib.m_NotificationUISystem.RemoveNotification(
+            EL.m_NotificationUISystem.RemoveNotification(
                 identifier: notificationInfo.id,
                 delay: 3f,
                 text: $"Done loaded {curentIndex}.",

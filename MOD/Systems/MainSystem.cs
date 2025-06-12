@@ -5,7 +5,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 
-namespace ExtraLandscapingTools
+namespace ExtraLandscapingTools.Systems
 {
     internal partial class MainSystem : GameSystemBase
     {
@@ -23,12 +23,12 @@ namespace ExtraLandscapingTools
         protected override void OnUpdate()
         {
 
-            if(s_clearUsedOreResource || s_clearUsedOilResource || s_clearUsedOreResource)
+            if (s_clearUsedOreResource || s_clearUsedOilResource || s_clearUsedOreResource)
             {
 
                 NativeArray<NaturalResourceCell> NaturalResourceCells = _naturalResourceSystem.GetData(false, out JobHandle dependencies).m_Buffer;
                 JobHandle jobHandle = JobHandle.CombineDependencies(Dependency, dependencies);
-                
+
 
                 ClearUsedResourceJob clearUsedResourceJob = new()
                 {
