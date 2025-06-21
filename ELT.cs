@@ -90,13 +90,15 @@ namespace ExtraLandscapingTools
 
 		private void OnEditEntities(NativeArray<Entity> entities)
 		{   
-			
-			foreach(Entity entity in entities) {
+			ELT.Logger.Info($"OnEditEntities called with {entities.Length} entities.");
+            foreach (Entity entity in entities) {
 				if(EL.m_PrefabSystem.TryGetPrefab(entity, out TerraformingPrefab prefab)) {
 
 					if(prefab.m_Target == TerraformingTarget.Material) continue;
 
-					var TerraformingUI = prefab.GetComponent<UIObject>();
+					ELT.Logger.Info($"Entity {EL.m_PrefabSystem.GetPrefabName(entity)} ({entity}) is a TerraformingPrefab, adding TerraformingData.");
+
+                    var TerraformingUI = prefab.GetComponent<UIObject>();
 					if (TerraformingUI == null)
 					{
 						TerraformingUI = prefab.AddComponent<UIObject>();
@@ -111,7 +113,10 @@ namespace ExtraLandscapingTools
 					TerraformingUI.m_Group.AddElement(entity);
 
                     EL.m_EntityManager.AddOrSetComponentData(entity, TerraformingUI.ToComponentData());
-				}
+				} else
+				{
+					ELT.Logger.Warn($"Entity {EL.m_PrefabSystem.GetPrefabName(entity)} ({entity}) is not a TerraformingPrefab, but has TerraformingData.");
+                }
 			}
 		}
     }
