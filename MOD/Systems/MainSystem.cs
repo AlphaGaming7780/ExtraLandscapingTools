@@ -12,6 +12,7 @@ namespace ExtraLandscapingTools.Systems
         internal static bool s_clearUsedOreResource = false;
         internal static bool s_clearUsedFertilityResource = false;
         internal static bool s_clearUsedOilResource = false;
+        internal static bool s_clearUsedFishResource = false;
 
         private NaturalResourceSystem _naturalResourceSystem;
         protected override void OnCreate()
@@ -36,6 +37,7 @@ namespace ExtraLandscapingTools.Systems
                     m_ClearUsedFertilityResource = s_clearUsedFertilityResource,
                     m_ClearUsedOilResource = s_clearUsedOilResource,
                     m_ClearUsedOreResource = s_clearUsedOreResource,
+                    m_ClearUsedFishResource = s_clearUsedFishResource,
                 };
                 JobHandle ClearjobHandle = clearUsedResourceJob.Schedule(NaturalResourceCells.Length, 16, jobHandle);
                 _naturalResourceSystem.AddWriter(ClearjobHandle);
@@ -56,13 +58,15 @@ namespace ExtraLandscapingTools.Systems
             public bool m_ClearUsedOilResource;
             public bool m_ClearUsedOreResource;
             public bool m_ClearUsedFertilityResource;
+            public bool m_ClearUsedFishResource;
 
             public void Execute(int index)
             {
                 NaturalResourceCell cell = m_Buffer[index];
-                if (m_ClearUsedFertilityResource) cell.m_Fertility.m_Used = 0; // cell.m_Fertility.m_Base;
-                if (m_ClearUsedOilResource) cell.m_Oil.m_Used = 0; // cell.m_Oil.m_Base;
-                if (m_ClearUsedOreResource) cell.m_Ore.m_Used = 0; // cell.m_Ore.m_Base;
+                if (m_ClearUsedFertilityResource) cell.m_Fertility.m_Used = 0;
+                if (m_ClearUsedOilResource) cell.m_Oil.m_Used = 0;
+                if (m_ClearUsedOreResource) cell.m_Ore.m_Used = 0;
+                if (m_ClearUsedFishResource) cell.m_Fish.m_Used = 0;
                 m_Buffer[index] = cell;
             }
         }

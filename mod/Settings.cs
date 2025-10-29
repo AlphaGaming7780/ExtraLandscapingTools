@@ -26,6 +26,10 @@ namespace ExtraLandscapingTools
         [SettingsUISection(kMainSection, kDepletedResourceGroup)]
         public bool ClearDepletedOilResource { set { MainSystem.s_clearUsedOilResource = true; } }
 
+        [SettingsUIButton]
+        [SettingsUISection(kMainSection, kDepletedResourceGroup)]
+        public bool ClearDepletedFishResource { set { MainSystem.s_clearUsedFishResource = true; } }
+
         public override void SetDefaults()
         {
             
