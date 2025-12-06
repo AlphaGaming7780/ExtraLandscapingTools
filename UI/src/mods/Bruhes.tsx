@@ -1,8 +1,8 @@
 import { useValue } from "cs2/api";
 import { useLocalization } from "cs2/l10n";
 import { ModuleRegistryExtend } from "cs2/modding";
-import { Brush, Entity, tool } from "cs2/bindings"
-import { Dropdown, DropdownItem, DropdownToggle } from "cs2/ui";
+import { Brush, Entity, SectionType, tool } from "cs2/bindings"
+import { Dropdown, DropdownToggle, DropdownItem } from "cs2/ui";
 import { createElement } from "react";
 import { entityEquals, entityKey } from "cs2/utils";
 import { PropsSlider, SliderValueTransformer, Slider } from "../../game-ui/common/input/slider/slider";
@@ -48,14 +48,8 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 				brush.name
 			)
 
-			reactNode.push(DropdownItem<Entity>({focusKey: FOCUS_DISABLED$, value: brush.entity, selected: entityEquals(tool.selectedBrush$.value, brush.entity), theme: {dropdownItem:"list-item_qRg item_H00"}, closeOnSelect: false, children: element, onChange: tool.selectBrush}));
+			reactNode.push(DropdownItem<Entity>({ focusKey: FOCUS_DISABLED$, value: brush.entity, selected: entityEquals(tool.selectedBrush$.value, brush.entity), theme: { dropdownItem: "list-item_qRg item_H00" }, closeOnSelect: false, children: element, onChange: tool.selectBrush }));
 		});
-		
-		// This defines aspects of the components.
-		const { children, ...otherProps} = props || {};
-
-		// This gets the original component that we may alter and return.
-		var result : JSX.Element = Component();
 
 		var propsSlider : PropsSlider = {
 			focusKey: FOCUS_DISABLED$,
@@ -67,10 +61,6 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 			disabled: false,
 			noFill: false,
 			onChange: function(number) {tool.setBrushAngle(number)},
-			// onDragStart: function() {console.log("onDragStart")},
-			// onDragEnd: function() {console.log("onDragEnd")},
-			// onMouseOver: function() {console.log("onMouseOver")},
-			// onMouseLeave: function() {console.log("onMouseLeave")}
 		}
 
 		let propsTextInput : PropsTextInput = {
@@ -96,11 +86,19 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 			]
 		}
 
-		if (allowBrush && selectedBrush.index != 0) {
+		const { children, ...otherProps } = props || {};
 
+		// This gets the original component that we may alter and return.
+		var result: JSX.Element = Component();
+
+		var brushSection = Section(propsSection)
+
+		var sliderSection =  Section(sliderPropsSection)
+
+		if (allowBrush && selectedBrush.index != 0) {
 			result.props.children?.unshift(
-				Section(propsSection),
-				Section(sliderPropsSection)
+				brushSection,
+				sliderSection
 			);
 		}
 		return result;

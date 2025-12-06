@@ -17,9 +17,9 @@ export type PropsTextInput = {
     placeholder?: string,
     vkTitle?: string,
     vkDescription?: string,
-    disabled: boolean,
+    disabled?: boolean,
     className?: string,
-    multiline: number,
+    multiline?: number,
     onFocus?: (value: Event) => void,
     onBlur?: (value: Event) => void,
     onKeyDown?: (value: Event) => void,
@@ -27,7 +27,9 @@ export type PropsTextInput = {
     onMouseUp?: (value: Event) => void,
 }
 
+const TextInputModule = getModule(path$, "TextInput");
+
 export function TextInput(propsTextInput: PropsTextInput) : JSX.Element
 {
-    return getModule(path$, "TextInput").render(propsTextInput)
+    return < TextInputModule {... propsTextInput } />
 }
