@@ -92,11 +92,11 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {
 		var result: JSX.Element = Component();
 
 		var brushSection = Section(propsSection)
-
 		var sliderSection =  Section(sliderPropsSection)
 
 		if (allowBrush && selectedBrush.index != 0) {
-			result.props.children?.unshift(
+			if (result.props.children === undefined) result.props.children = []
+			result.props.children.unshift(
 				brushSection,
 				sliderSection
 			);

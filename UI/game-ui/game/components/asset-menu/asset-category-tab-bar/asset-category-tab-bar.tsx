@@ -16,7 +16,7 @@ import { FOCUS_DISABLED$ } from "../../../../common/focus/focus-key"
 
 const path$ = "game-ui/game/components/asset-menu/asset-category-tab-bar/asset-category-tab-bar.tsx"
 
-export type PropsAssetCategoryTabBar = {
+export interface PropsAssetCategoryTabBar {
 	categories: Array<AssetCategory>
 	selectedCategory: Entity
 	onChange: (value: Event) => void,

@@ -1,8 +1,10 @@
+import { Theme } from "cs2/bindings";
 import { getModule } from "cs2/modding"
+import { PanelProps } from "cs2/ui";
 
 const path$ = "game-ui/common/panel/collapsible-panel.tsx"
 
-export type PropsCollapsiblePanel = {
+export interface PropsCollapsiblePanel extends PanelProps {
     theme?: any,
     onClose?: () => void,
     expanded?: boolean,
@@ -13,7 +15,6 @@ export type PropsCollapsiblePanel = {
     isFocusRoot?: any,
     headerIcon?: any,
     togglable?: boolean,
-    [key: string]: any;
 }
 
 const CollapsiblePanelModule = getModule(path$, "CollapsiblePanel");
