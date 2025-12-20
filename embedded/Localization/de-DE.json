@@ -11,5 +11,7 @@
   "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Erschöpfte Erzressourcen auffüllen",
   "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "Füllt alle Erzvorkommen auf der Karte wieder auf.",
   "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Erschöpfte Ölvorkommen auffüllen",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Füllt alle Ölvorkommen auf der Karte wieder auf."
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "Füllt alle Ölvorkommen auf der Karte wieder auf.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFishResource]": "Erschöpfte Fischbestände auffüllen",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFishResource]": "Füllt die erschöpften Fischressourcen auf der ganzen Karte auf."
 }
