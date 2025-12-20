@@ -1,106 +1,120 @@
 import { useValue } from "cs2/api";
+import { Entity, tool } from "cs2/bindings";
 import { useLocalization } from "cs2/l10n";
 import { ModuleRegistryExtend } from "cs2/modding";
-import { Brush, Entity, SectionType, tool } from "cs2/bindings"
-import { Dropdown, DropdownToggle, DropdownItem } from "cs2/ui";
-import { createElement } from "react";
+import { Dropdown, DropdownItem, DropdownToggle } from "cs2/ui";
 import { entityEquals, entityKey } from "cs2/utils";
-import { PropsSlider, SliderValueTransformer, Slider } from "../../game-ui/common/input/slider/slider";
-import { PropsSection, Section } from "../../game-ui/game/components/tool-options/mouse-tool-options/mouse-tool-options";
-import { PropsTextInput, TextInput, TextInputType } from "../../game-ui/common/input/text/text-input";
 import { FOCUS_DISABLED$ } from "../../game-ui/common/focus/focus-key";
+import { PropsSlider, Slider, SliderValueTransformer } from "../../game-ui/common/input/slider/slider";
+import { PropsTextInput, TextInput, TextInputType } from "../../game-ui/common/input/text/text-input";
+import { PropsSection, Section } from "../../game-ui/game/components/tool-options/mouse-tool-options/mouse-tool-options";
+import { useEffect, useState } from "react";
 
+export const BrushesOptionsTool: ModuleRegistryExtend = (Component: any) => {
+    return (props) => {
+        const allowBrush = useValue(tool.allowBrush$);
+        const brushes = useValue(tool.brushes$);
+        const selectedBrush = useValue(tool.selectedBrush$);
+        const brushAngleValue = useValue(tool.brushAngle$);
 
-export const BrushesOptionsTool: ModuleRegistryExtend = (Component : any) => {	
-	return (props) => {
+        const [brushAngle, setBrushAngle] = useState(brushAngleValue)
 
-		let allowBrush : boolean= useValue(tool.allowBrush$);
-		let brushes : Brush[] = useValue(tool.brushes$);
-		let selectedBrush : Entity = useValue(tool.selectedBrush$);
-		let brushAngle : number = useValue(tool.brushAngle$);
-		var reactNode : JSX.Element[] = [];
-		// translation handling. Translates using locale keys that are defined in C# or fallback string here.
-		const { translate } = useLocalization();
+        useEffect(() => {
 
-		function GetSelectedBrushName() : string { // brushes : Brush[], entity: Entity
-			for(let i = 0; i < brushes.length; i++) {
-				if(entityEquals(brushes[i].entity, selectedBrush)) {
-					return brushes[i].name
-				}
-			}
-			return entityKey(selectedBrush)
-		}
+            setBrushAngle(brushAngleValue);
 
-		var dropdownToggle = DropdownToggle({style: {maxWidth: "175rem"}, children: GetSelectedBrushName()})
-		
-		var dropDown = Dropdown({focusKey: FOCUS_DISABLED$, theme: {dropdownToggle: "picker-toggle_d6k", dropdownPopup: "picker-popup_pUb", dropdownMenu: "", dropdownItem: "list-item_qRg item_H00", scrollable: "item-picker_ORP"}, content: reactNode, children: dropdownToggle})
+        }, [brushAngleValue] )
 
-		var propsSection : PropsSection = {
-			title: translate("Toolbar.BRUSH"),
-			children: dropDown
-		}
+        const { translate } = useLocalization();
 
-		brushes.forEach(brush => {
+        const selectedBrushName = brushes.find(b => entityEquals(b.entity, selectedBrush))?.name || entityKey(selectedBrush);
 
-			var element = createElement(
-				'div',
-				{ className: 'name_u39' },
-				brush.name
-			)
+        // Dropdown items
+        const brushItems = brushes.map((brush) => (
+            <DropdownItem<Entity>
+                key={entityKey(brush.entity)}
+                focusKey={FOCUS_DISABLED$}
+                value={brush.entity}
+                selected={entityEquals(tool.selectedBrush$.value, brush.entity)}
+                theme={{ dropdownItem: "list-item_qRg item_H00" }}
+                closeOnSelect={false}
+                onChange={tool.selectBrush}
+            >
+                <div className="name_u39">{brush.name}</div>
+            </DropdownItem>
+        ));
 
-			reactNode.push(DropdownItem<Entity>({ focusKey: FOCUS_DISABLED$, value: brush.entity, selected: entityEquals(tool.selectedBrush$.value, brush.entity), theme: { dropdownItem: "list-item_qRg item_H00" }, closeOnSelect: false, children: element, onChange: tool.selectBrush }));
-		});
+        const dropdown = (
+            <Dropdown
+                focusKey={FOCUS_DISABLED$}
+                theme={{
+                    dropdownToggle: "picker-toggle_d6k",
+                    dropdownPopup: "picker-popup_pUb",
+                    dropdownMenu: "",
+                    dropdownItem: "list-item_qRg item_H00",
+                    scrollable: "item-picker_ORP"
+                }}
+                content={brushItems }
+            >
+                <DropdownToggle style={{ maxWidth: "175rem" }}>{selectedBrushName}</DropdownToggle>
+            </Dropdown>
+        );
 
-		var propsSlider : PropsSlider = {
-			focusKey: FOCUS_DISABLED$,
-			value: brushAngle,
-			start: 0,
-			end: 360,
-			gamepadStep: 1,
-			valueTransformer: SliderValueTransformer.intTransformer,
-			disabled: false,
-			noFill: false,
-			onChange: function(number) {tool.setBrushAngle(number)},
-		}
+        const brushSectionProps: PropsSection = {
+            title: translate("Toolbar.BRUSH"),
+            children: dropdown
+        };
 
-		let propsTextInput : PropsTextInput = {
-			focusKey: FOCUS_DISABLED$,
-			type: TextInputType.Text,
-			disabled: false,
-			multiline: 1,
-			value: brushAngle.toString(),
-			className: "slider-input_DXM input_Wfi",
-			onChange(value) {
-				if(value?.target instanceof HTMLTextAreaElement) {
-					let number : number = parseInt(value.target.value, 10)
-					tool.setBrushAngle(number)
-				}
-			},
-		}
+        const brushSliderProps: PropsSlider = {
+            focusKey: FOCUS_DISABLED$,
+            value: isNaN(brushAngle) ? 0 : brushAngle,
+            start: 0,
+            end: 360,
+            gamepadStep: 1,
+            valueTransformer: SliderValueTransformer.intTransformer,
+            disabled: false,
+            noFill: false,
+            onChange: tool.setBrushAngle
+        };
 
-		var sliderPropsSection : PropsSection = {
-			title: translate("Toolbar.BRUSH_ROTATION"),
-			children: [
-				<div className="slider-container_Q_K" style={{maxWidth:"110rem"}}>{Slider(propsSlider)}</div>,
-				TextInput(propsTextInput)
-			]
-		}
+        const brushAngleInputProps: PropsTextInput = {
+            style: {
+                height: "var(--size)"
+            },
+            focusKey: FOCUS_DISABLED$,
+            selectAllOnFocus: true,
+            type: TextInputType.Text,
+            disabled: false,
+            value: isNaN(brushAngle) ? "" : brushAngle.toString(),
+            className: "slider-input_DXM input_Wfi",
+            onChange: (e) => {
+                setBrushAngle(parseInt(e.target.value, 10));
+            },
+            onBlur: (e) => {
+                var number = parseInt(e.target.value, 10);
+                if (isNaN(number)) number = 0;
+                tool.setBrushAngle(number);
+            }
+        };
 
-		const { children, ...otherProps } = props || {};
+        const brushRotationSectionProps: PropsSection = {
+            title: translate("Toolbar.BRUSH_ROTATION"),
+            children: (
+                <>
+                    <div className="slider-container_Q_K" style={{ maxWidth: "110rem" }}>
+                        <Slider {...brushSliderProps} />
+                    </div>
+                    <TextInput {...brushAngleInputProps} />
+                </>
+            )
+        };
 
-		// This gets the original component that we may alter and return.
-		var result: JSX.Element = Component();
+        const originalComponent = Component(props);
+        if (allowBrush && selectedBrush.index !== 0) {
+            const children = originalComponent.props.children ?? [];
+            originalComponent.props.children = [<Section {...brushSectionProps} />, <Section {...brushRotationSectionProps} />, ...children];
+        }
 
-		var brushSection = Section(propsSection)
-		var sliderSection =  Section(sliderPropsSection)
-
-		if (allowBrush && selectedBrush.index != 0) {
-			if (result.props.children === undefined) result.props.children = []
-			result.props.children.unshift(
-				brushSection,
-				sliderSection
-			);
-		}
-		return result;
-	};
-}
+        return originalComponent;
+    };
+};

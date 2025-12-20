@@ -8,24 +8,15 @@ export enum TextInputType {
     Password = "password",
 }
 
-export type PropsTextInput = {
-	focusKey?: FocusKey,
-	debugName?: string,
-    type?: TextInputType | string,
-    value?: string,
-    selectAllOnFocus?: boolean,
-    placeholder?: string,
-    vkTitle?: string,
-    vkDescription?: string,
-    disabled?: boolean,
-    className?: string,
-    multiline?: number,
-    onFocus?: (value: Event) => void,
-    onBlur?: (value: Event) => void,
-    onKeyDown?: (value: Event) => void,
-    onChange?: (value: Event) => void,
-    onMouseUp?: (value: Event) => void,
-}
+export type PropsTextInput = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    focusKey?: FocusKey;
+    debugName?: string;
+    type?: TextInputType | string; // optionnel, peut servir pour ton UI
+    selectAllOnFocus?: boolean;
+    vkTitle?: string;
+    vkDescription?: string;
+    multiline?: boolean; // peut remplacer "rows"
+};
 
 const TextInputModule = getModule(path$, "TextInput");
 
