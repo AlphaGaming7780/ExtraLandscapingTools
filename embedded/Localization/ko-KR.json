@@ -1,17 +1,17 @@
 {
   "Toolbar.BRUSH": "브러시",
-  "Toolbar.BRUSH_ROTATION": "회전값",
+  "Toolbar.BRUSH_ROTATION": "브러쉬 회전",
   "Assets.DESCRIPTION[Ore Resource Tool]": "광석 자원 도구",
   "Assets.DESCRIPTION[Oil Resource Tool]": "석유 자원 도구",
   "Assets.DESCRIPTION[FertileLand Resource Tool]": "비옥지 자원 도구",
   "Assets.DESCRIPTION[GroundWater Resource Tool]": "지하수 자원 도구",
-  "Options.SECTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT]": "추가 조경 도구(Extra Landscaping Tools)",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "고갈된 비옥지 자원 재보충",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "맵 전체에 고갈된 비옥지 자원을 보충합니다.",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "고갈된 광석 자원 재보충",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "맵 전체에 고갈된 광석 자원을 보충합니다.",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "고갈된 석유 자원 재보충",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "맵 전체에 고갈된 석유자원을 보충합니다.",
-  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFishResource]": "Refill depleted fish resources",
-  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFishResource]": "Refill depleted fish resources on all the map."
+  "Options.SECTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT]": "추가 조경 도구 (Extra Landscaping Tools)",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "고갈된 비옥지 자원 보충",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFertilityResource]": "지도 전체에 고갈된 비옥지 자원을 보충합니다.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "고갈된 광석 자원 보충",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOreResource]": "지도 전체에 고갈된 광석 자원을 보충합니다.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "고갈된 석유 자원 보충",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedOilResource]": "지도 전체에 고갈된 석유 자원을 보충합니다.",
+  "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFishResource]": "고갈된 어류 자원 보충",
+  "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.ClearDepletedFishResource]": "지도 전체에 고갈된 어류 자원을 보충합니다."
 }
