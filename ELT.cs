@@ -85,7 +85,7 @@ namespace ExtraLandscapingTools
 
 		private void Initialize()
 		{
-            EL.extraLibMonoScript.StartCoroutine(CustomBrushes.LoadCustomBrushes());
+            GameManager.instance.StartCoroutine(CustomBrushes.LoadCustomBrushes());
         }
 
 		private void OnEditEntities(NativeArray<Entity> entities)
