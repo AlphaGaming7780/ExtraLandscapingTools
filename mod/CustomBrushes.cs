@@ -59,6 +59,7 @@ namespace ExtraLandscapingTools
                     }
 
                     TextureHelper.Format(ref texture2D, TextureFormat.Alpha8);
+                    texture2D.wrapMode = TextureWrapMode.Clamp;
 
                     BrushPrefab brushPrefab = (BrushPrefab)ScriptableObject.CreateInstance("BrushPrefab");
                     brushPrefab.name = name;

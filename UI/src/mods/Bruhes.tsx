@@ -112,7 +112,11 @@ export const BrushesOptionsTool: ModuleRegistryExtend = (Component: any) => {
         const originalComponent = Component(props);
         if (allowBrush && selectedBrush.index !== 0) {
             const children = originalComponent.props.children ?? [];
-            originalComponent.props.children = [<Section {...brushSectionProps} />, <Section {...brushRotationSectionProps} />, ...children];
+            originalComponent.props.children = [
+                // <Section {...brushSectionProps} />,
+                <Section {...brushRotationSectionProps} />,
+                ...children
+            ];
         }
 
         return originalComponent;

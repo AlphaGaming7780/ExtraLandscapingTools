@@ -98,21 +98,25 @@ namespace ExtraLandscapingTools
 
 					ELT.Logger.Info($"Entity {EL.m_PrefabSystem.GetPrefabName(entity)} ({entity}) is a TerraformingPrefab, adding TerraformingData.");
 
-                    var TerraformingUI = prefab.GetComponent<UIObject>();
-					if (TerraformingUI == null)
+                    var terraformingUI = prefab.GetComponent<UIObject>();
+					if (terraformingUI == null)
 					{
-						TerraformingUI = prefab.AddComponent<UIObject>();
-						TerraformingUI.active = true;
-						TerraformingUI.m_IsDebugObject = false;
-						TerraformingUI.m_Icon = "Media/Game/Icons/LotTool.svg";
-						TerraformingUI.m_Priority = 1;
-					}
+						terraformingUI = prefab.AddComponent<UIObject>();
+						terraformingUI.active = true;
+						terraformingUI.m_IsDebugObject = false;
+						terraformingUI.m_Icon = "Media/Game/Icons/LotTool.svg";
+						terraformingUI.m_Priority = 110;
+					} 
+					else if(prefab.m_Target != TerraformingTarget.Height && prefab.m_Target != TerraformingTarget.Material)
+					{
+						terraformingUI.m_Priority += 50;
+                    }
 
-					TerraformingUI.m_Group?.RemoveElement(entity);
-					TerraformingUI.m_Group = PrefabsHelper.GetUIAssetCategoryPrefab("Terraforming");
-					TerraformingUI.m_Group.AddElement(entity);
+                    terraformingUI.m_Group?.RemoveElement(entity);
+					terraformingUI.m_Group = PrefabsHelper.GetUIAssetCategoryPrefab("Terraforming");
+					terraformingUI.m_Group.AddElement(entity);
 
-                    EL.m_EntityManager.AddOrSetComponentData(entity, TerraformingUI.ToComponentData());
+                    EL.m_EntityManager.AddOrSetComponentData(entity, terraformingUI.ToComponentData());
 				} else
 				{
 					ELT.Logger.Warn($"Entity {EL.m_PrefabSystem.GetPrefabName(entity)} ({entity}) is not a TerraformingPrefab, but has TerraformingData.");
