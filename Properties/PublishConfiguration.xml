@@ -61,7 +61,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extralandscapingtools.1647852/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.3.8" />
+	<ModVersion Value="1.3.9" />
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.5.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -70,11 +70,9 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
 ### Fixes
-- Fixes for ExtraLib 1.4.8.
-
-### Translations
-- ✔️Chinese Traditional 100% : copguhh139
-- ✔️Korean 100% : zuben00
+- Fixed UI priority for the resources tools in the UI.
+- Removed the brush selector because the game has one.
+- Fixed the issue of rotated custom brushes.
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extralandscapingtools" />
