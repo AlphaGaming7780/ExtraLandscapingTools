@@ -22,11 +22,12 @@ namespace ExtraLandscapingTools
             brushesLoaded = true;
 
             int numberOfBrushes = 0;
-            int curentIndex = 0;
+            int currentIndex = 0;
+            int loadedCount = 0;
 
             foreach (string folder in folderToLoadCustomBrushes)
             {
-                ;
+                if (!Directory.Exists(folder)) continue;
                 numberOfBrushes += Directory.GetFiles(folder).Length;
             }
 
@@ -41,38 +42,40 @@ namespace ExtraLandscapingTools
 
             foreach (string folder in folderToLoadCustomBrushes)
             {
-                ;
                 foreach (string filePath in Directory.GetFiles(folder))
                 {
                     string name = Path.GetFileNameWithoutExtension(filePath);
                     notificationInfo.progressState = ProgressState.Progressing;
-                    notificationInfo.progress = (int)(curentIndex / (float)numberOfBrushes * 100);
+                    notificationInfo.progress = (int)(currentIndex / (float)numberOfBrushes * 100);
                     notificationInfo.text = name;
                     yield return null;
+
+                    currentIndex++;
 
                     byte[] fileData = File.ReadAllBytes(filePath);
                     Texture2D texture2D = new(1, 1);
                     if (!texture2D.LoadImage(fileData))
                     {
-                        ELT.Logger.Warn($"Filded to load {name}.");
+                        ELT.Logger.Warn($"Failed to load {name}.");
                         UnityEngine.Object.Destroy(texture2D);
+                        continue;
                     }
 
                     TextureHelper.Format(ref texture2D, TextureFormat.Alpha8);
                     texture2D.wrapMode = TextureWrapMode.Clamp;
 
-                    BrushPrefab brushPrefab = (BrushPrefab)ScriptableObject.CreateInstance("BrushPrefab");
+                    BrushPrefab brushPrefab = ScriptableObject.CreateInstance<BrushPrefab>();
                     brushPrefab.name = name;
                     brushPrefab.m_Texture = texture2D;
                     EL.m_PrefabSystem.AddPrefab(brushPrefab);
-                    curentIndex++;
+                    loadedCount++;
                 }
             }
 
             EL.m_NotificationUISystem.RemoveNotification(
                 identifier: notificationInfo.id,
                 delay: 3f,
-                text: $"Done loaded {curentIndex}.",
+                text: $"Done loaded {loadedCount}.",
                 progressState: ProgressState.Complete,
                 progress: 100
             );

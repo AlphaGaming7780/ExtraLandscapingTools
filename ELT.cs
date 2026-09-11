@@ -9,9 +9,8 @@ using Game;
 using Game.Modding;
 using Game.Prefabs;
 using Game.SceneFlow;
-//using HarmonyLib;
+using Game.Simulation;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using Unity.Collections;
 using Unity.Entities;
@@ -29,8 +28,8 @@ namespace ExtraLandscapingTools
 #else
 		internal static Logger Logger = new(log, false);
 #endif
-        //private Harmony harmony;
-		public void OnLoad(UpdateSystem updateSystem)
+
+        public void OnLoad(UpdateSystem updateSystem)
 		{
             Logger.Info(nameof(OnLoad));
 
@@ -38,7 +37,9 @@ namespace ExtraLandscapingTools
 			{
 				Logger.Info($"Current mod asset at {asset.path}");
 				FileInfo fileInfo = new(asset.path);
-				CustomBrushes.folderToLoadCustomBrushes.Add($"{fileInfo.Directory.FullName}\\CustomBrushes");
+				string path = Path.Combine(fileInfo.Directory.FullName, "CustomBrushes");
+				if(Directory.Exists(path))
+                    CustomBrushes.folderToLoadCustomBrushes.Add(path);
 
 				string pathToDataBrushes = Path.Combine(EnvPath.kUserDataPath, "ModsData", nameof(ExtraLandscapingTools), "CustomBrushes");
 				if (Directory.Exists(pathToDataBrushes)) CustomBrushes.folderToLoadCustomBrushes.Add(pathToDataBrushes);
@@ -51,7 +52,13 @@ namespace ExtraLandscapingTools
             s_setting.RegisterInOptionsUI();
             AssetDatabase.global.LoadSettings("ELTSettings", s_setting, new ELTSettings(this));
 
-            updateSystem.UpdateAt<MainSystem>(SystemUpdatePhase.LateUpdate);
+            // AreaLotSimulationSystem is registered after GroundWaterPollutionSystem in
+            // SystemOrder.cs, so depending on it alone still places ClearDepletedSystem after both. (I hope)
+            updateSystem.UpdateAfter<ClearDepletedSystem, AreaLotSimulationSystem>(SystemUpdatePhase.GameSimulation);
+            updateSystem.UpdateAfter<InfiniteResourceSystem, AreaLotSimulationSystem>(SystemUpdatePhase.GameSimulation);
+            updateSystem.UpdateAfter<InfiniteGroundWaterSystem, GroundWaterPollutionSystem>(SystemUpdatePhase.GameSimulation);
+
+            updateSystem.UpdateAfter<DailyRegenSystem, GameModeNaturalResourcesAdjustSystem>(SystemUpdatePhase.GameSimulation);
 
             EntityQueryDesc entityQueryDesc = new()
 			{
@@ -62,21 +69,11 @@ namespace ExtraLandscapingTools
 			EL.AddOnEditEnities(new(OnEditEntities, entityQueryDesc));
 
             EL.AddOnInitialize(Initialize);
-
-			//harmony = new($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
-			//harmony.PatchAll(typeof(ELT).Assembly);
-			//var patchedMethods = harmony.GetPatchedMethods().ToArray();
-			//Logger.Info($"Plugin ExtraLandscapingTools made patches! Patched methods: " + patchedMethods.Length);
-			//foreach (var patchedMethod in patchedMethods)
-			//{
-			//	Logger.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
-			//}
 		}
 
 		public void OnDispose()
 		{
-   //         Logger.Info(nameof(OnDispose));
-			//harmony.UnpatchAll($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
+
 		}
 
 		internal static Stream GetEmbedded(string embeddedPath) {
@@ -91,15 +88,18 @@ namespace ExtraLandscapingTools
 		private void OnEditEntities(NativeArray<Entity> entities)
 		{   
 			ELT.Logger.Info($"OnEditEntities called with {entities.Length} entities.");
-            foreach (Entity entity in entities) {
+            foreach (Entity entity in entities) 
+			{
 				if(EL.m_PrefabSystem.TryGetPrefab(entity, out TerraformingPrefab prefab)) {
 
 					if(prefab.m_Target == TerraformingTarget.Material) continue;
 
 					ELT.Logger.Info($"Entity {EL.m_PrefabSystem.GetPrefabName(entity)} ({entity}) is a TerraformingPrefab, adding TerraformingData.");
 
-                    var terraformingUI = prefab.GetComponent<UIObject>();
-					if (terraformingUI == null)
+					var terraformingUI = prefab.GetComponent<UIObject>();
+
+                    //They should already have a UIObject, but just in case, we add one if it doesn't exist.
+                    if (terraformingUI == null)
 					{
 						terraformingUI = prefab.AddComponent<UIObject>();
 						terraformingUI.active = true;
