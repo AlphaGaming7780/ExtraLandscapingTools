@@ -9,7 +9,7 @@ using Game;
 using Game.Modding;
 using Game.Prefabs;
 using Game.SceneFlow;
-using HarmonyLib;
+//using HarmonyLib;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -29,7 +29,7 @@ namespace ExtraLandscapingTools
 #else
 		internal static Logger Logger = new(log, false);
 #endif
-        private Harmony harmony;
+        //private Harmony harmony;
 		public void OnLoad(UpdateSystem updateSystem)
 		{
             Logger.Info(nameof(OnLoad));
@@ -63,20 +63,20 @@ namespace ExtraLandscapingTools
 
             EL.AddOnInitialize(Initialize);
 
-			harmony = new($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
-			harmony.PatchAll(typeof(ELT).Assembly);
-			var patchedMethods = harmony.GetPatchedMethods().ToArray();
-			Logger.Info($"Plugin ExtraLandscapingTools made patches! Patched methods: " + patchedMethods.Length);
-			foreach (var patchedMethod in patchedMethods)
-			{
-				Logger.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
-			}
+			//harmony = new($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
+			//harmony.PatchAll(typeof(ELT).Assembly);
+			//var patchedMethods = harmony.GetPatchedMethods().ToArray();
+			//Logger.Info($"Plugin ExtraLandscapingTools made patches! Patched methods: " + patchedMethods.Length);
+			//foreach (var patchedMethod in patchedMethods)
+			//{
+			//	Logger.Info($"Patched method: {patchedMethod.Module.Name}:{patchedMethod.Name}");
+			//}
 		}
 
 		public void OnDispose()
 		{
-            Logger.Info(nameof(OnDispose));
-			harmony.UnpatchAll($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
+   //         Logger.Info(nameof(OnDispose));
+			//harmony.UnpatchAll($"{nameof(ExtraLandscapingTools)}.{nameof(ELT)}");
 		}
 
 		internal static Stream GetEmbedded(string embeddedPath) {
