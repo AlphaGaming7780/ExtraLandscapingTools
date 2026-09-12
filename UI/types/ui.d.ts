@@ -323,10 +323,12 @@ declare module "cs2/ui" {
   	"Economy Panel": Action;
   	"City Information Panel": Action;
   	"Statistic Panel": Action;
+  	"Toggle Global Contour Lines": Action;
   	"Transportation Overview Panel": Action;
   	"Notification Panel": Action;
   	"Chirper Panel": Action;
   	"Lifepath Panel": Action;
+  	"Universal Mod Panel": Action;
   	"Event Journal Panel": Action;
   	"Radio Panel": Action;
   	"Photo Mode Panel": Action;
@@ -455,7 +457,7 @@ declare module "cs2/ui" {
   	selectSound?: UISound | string | null;
   	tooltipLabel?: ReactNode;
   }
-  interface DropdownItem<T> {
+  export interface DropdownItem<T> {
   	value: T;
   	displayName: LocElement;
   	tooltip?: LocElement;
@@ -530,6 +532,7 @@ declare module "cs2/ui" {
   export interface InfoRowProps extends ClassProps {
   	icon?: string;
   	left?: ReactNode;
+  	center?: ReactNode;
   	right?: ReactNode;
   	tooltip?: ReactNode;
   	link?: ReactNode;
@@ -540,7 +543,7 @@ declare module "cs2/ui" {
   	noShrinkRight?: boolean;
   	justifyLeft?: boolean;
   }
-  export const InfoRow: ({ icon, left, right, tooltip, link, uppercase, subRow, subRowDimmed, disableFocus, className, noShrinkRight, justifyLeft }: InfoRowProps) => JSX.Element;
+  export const InfoRow: ({ icon, left, center, right, tooltip, link, uppercase, subRow, subRowDimmed, disableFocus, className, noShrinkRight, justifyLeft }: InfoRowProps) => JSX.Element;
   export interface SimplePanelProps extends PanelProps {
   	draggable?: false | undefined;
   }
@@ -592,7 +595,7 @@ declare module "cs2/ui" {
   export interface ScrollableProps {
   	horizontal?: boolean;
   	vertical?: boolean;
-  	trackVisibility?: "always" | "scrollable";
+  	trackVisibility?: "always" | "scrollable" | "reserve";
   	overshootX?: number;
   	overshootY?: number;
   	smooth?: boolean;
@@ -604,6 +607,7 @@ declare module "cs2/ui" {
   	onOverflowY?: (overflow: boolean) => void;
   	autoScroll?: boolean;
   	autoScrollSettings?: AutoScrollSettings;
+  	useNewStyle?: boolean;
   }
   export export const Scrollable: (props: ScrollableProps & {
   	children?: import("react").ReactNode;

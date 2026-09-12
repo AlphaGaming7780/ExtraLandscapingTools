@@ -48,8 +48,7 @@ namespace ExtraLandscapingTools
 			else Logger.Error("Failed to get the ExecutableAsset.");
 
             s_setting = new ELTSettings(this);
-            s_setting.RegisterKeyBindings();
-            s_setting.RegisterInOptionsUI();
+			s_setting.RegisterInOptionsUI();
             AssetDatabase.global.LoadSettings("ELTSettings", s_setting, new ELTSettings(this));
 
             // AreaLotSimulationSystem is registered after GroundWaterPollutionSystem in
