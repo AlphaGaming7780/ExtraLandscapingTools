@@ -1,6 +1,7 @@
 ﻿using Colossal.IO.AssetDatabase;
 using Colossal.Logging;
 using Colossal.PSI.Environment;
+using ExtraLandscapingTools.Systems.Infinite;
 using ExtraLandscapingTools.Systems;
 using ExtraLib;
 using ExtraLib.ClassExtension;
@@ -56,6 +57,7 @@ namespace ExtraLandscapingTools
             updateSystem.UpdateAfter<ClearDepletedSystem, AreaLotSimulationSystem>(SystemUpdatePhase.GameSimulation);
             updateSystem.UpdateAfter<InfiniteResourceSystem, AreaLotSimulationSystem>(SystemUpdatePhase.GameSimulation);
             updateSystem.UpdateAfter<InfiniteGroundWaterSystem, GroundWaterPollutionSystem>(SystemUpdatePhase.GameSimulation);
+            updateSystem.UpdateAfter<InfiniteGroundPollutionSystem, GroundPollutionSystem>(SystemUpdatePhase.GameSimulation);
 
             updateSystem.UpdateAfter<DailyRegenSystem, GameModeNaturalResourcesAdjustSystem>(SystemUpdatePhase.GameSimulation);
 

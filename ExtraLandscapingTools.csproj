@@ -15,6 +15,9 @@
 		
 		<!--The file where mod information which is required for publishing mod on PDX mods are stored-->
 		<PublishConfigurationPath>Properties\PublishConfiguration.xml</PublishConfigurationPath>
+
+		<!--Uncomment to enable the ProfilerMarker instrumentation on the Burst jobs in mod/Systems/Jobs (debug perf testing only)-->
+		<!--<DefineConstants>$(DefineConstants);ELT_PROFILING</DefineConstants>-->
 	</PropertyGroup>
 
   <ItemGroup>

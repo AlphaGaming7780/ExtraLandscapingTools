@@ -9,13 +9,16 @@ using Unity.Mathematics;
 namespace ExtraLandscapingTools.Systems
 {
     // Replicates Game.Simulation.GameModeNaturalResourcesAdjustSystem's percent-per-day refill for
-    // natural resources, plus the equivalent for groundwater amount/pollution, driven by our own
-    // settings instead of the gamemode prefab. Disabled by default and turned on only while RegenMode
-    // is set to DailyRegen.
+    // natural resources, plus the equivalent for groundwater amount/pollution and ground (soil)
+    // pollution, driven by our own settings instead of the gamemode prefab / native fade rate.
+    // Disabled by default and turned on only while RegenMode is set to DailyRegen.
     //
     // Same update interval as GameModeNaturalResourcesAdjustSystem (128 updates/day), the system this
     // one is registered UpdateAfter in ELT.cs: UpdateSystem only inherits an anchor's exact tick
-    // offset when the interval matches, so this has to line up with its anchor.
+    // offset when the interval matches, so this has to line up with its anchor. That interval also
+    // happens to match Game.Simulation.GroundPollutionSystem's own cadence, and
+    // GameModeNaturalResourcesAdjustSystem is registered after it in SystemOrder.cs, so the ground
+    // pollution regen below is correctly ordered too without needing its own anchor.
     internal partial class DailyRegenSystem : GameSystemBase
     {
         private const int kUpdatesPerDay = 128;
@@ -23,12 +26,14 @@ namespace ExtraLandscapingTools.Systems
 
         private NaturalResourceSystem m_NaturalResourceSystem;
         private GroundWaterSystem m_GroundWaterSystem;
+        private GroundPollutionSystem m_GroundPollutionSystem;
 
         protected override void OnCreate()
         {
             base.OnCreate();
             m_NaturalResourceSystem = World.GetOrCreateSystemManaged<NaturalResourceSystem>();
             m_GroundWaterSystem = World.GetOrCreateSystemManaged<GroundWaterSystem>();
+            m_GroundPollutionSystem = World.GetOrCreateSystemManaged<GroundPollutionSystem>();
             Enabled = ELT.s_setting?.RegenMode == RegenMode.DailyRegen;
         }
 
@@ -44,6 +49,7 @@ namespace ExtraLandscapingTools.Systems
 
             RegenNaturalResources(settings);
             RegenGroundWater(settings);
+            RegenGroundPollution(settings);
         }
 
         private void RegenNaturalResources(ELTSettings settings)
@@ -93,6 +99,23 @@ namespace ExtraLandscapingTools.Systems
             };
             JobHandle regenJobHandle = regenJob.Schedule(groundWaterCells.Length, 64, jobHandle);
             m_GroundWaterSystem.AddWriter(regenJobHandle);
+            Dependency = regenJobHandle;
+        }
+
+        private void RegenGroundPollution(ELTSettings settings)
+        {
+            if (settings.GroundPollutionReductionPercent <= 0) return;
+
+            NativeArray<GroundPollution> groundPollutionCells = m_GroundPollutionSystem.GetData(false, out JobHandle dependencies).m_Buffer;
+            JobHandle jobHandle = JobHandle.CombineDependencies(Dependency, dependencies);
+
+            RegenGroundPollutionJob regenJob = new()
+            {
+                m_Buffer = groundPollutionCells,
+                m_PollutionReductionPercent = settings.GroundPollutionReductionPercent,
+            };
+            JobHandle regenJobHandle = regenJob.Schedule(groundPollutionCells.Length, 64, jobHandle);
+            m_GroundPollutionSystem.AddWriter(regenJobHandle);
             Dependency = regenJobHandle;
         }
 
@@ -166,6 +189,26 @@ namespace ExtraLandscapingTools.Systems
             private static int Step(int total, int percentPerDay)
             {
                 return (int)((float)total * ((float)percentPerDay / 100f) / kUpdatesPerDay);
+            }
+        }
+
+#if RELEASE
+        [BurstCompile]
+#endif
+        private struct RegenGroundPollutionJob : IJobParallelFor
+        {
+            public NativeArray<GroundPollution> m_Buffer;
+            [ReadOnly] public int m_PollutionReductionPercent;
+
+            public void Execute(int index)
+            {
+                GroundPollution cell = m_Buffer[index];
+                // Ground pollution has no fixed "base"/capacity field like ore/oil/fertility/fish or
+                // groundwater's own amount, so the percentage is applied to the pollution value
+                // itself each update (an exponential decay) rather than as a flat decrement of a
+                // fixed total.
+                cell.m_Pollution = (short)math.max(0f, (float)(int)cell.m_Pollution - (float)(int)cell.m_Pollution * ((float)m_PollutionReductionPercent / 100f) / kUpdatesPerDay);
+                m_Buffer[index] = cell;
             }
         }
     }

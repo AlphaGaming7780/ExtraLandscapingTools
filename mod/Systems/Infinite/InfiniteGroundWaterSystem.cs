@@ -1,10 +1,11 @@
+using ExtraLandscapingTools.Systems.Jobs;
 using Game;
 using Game.Simulation;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 
-namespace ExtraLandscapingTools.Systems
+namespace ExtraLandscapingTools.Systems.Infinite
 {
     // Keeps groundwater full and/or unpolluted, every update, depending on which of the two settings
     // is checked. Disabled by default and turned on only while RegenMode is Infinite and at least one
@@ -37,12 +38,7 @@ namespace ExtraLandscapingTools.Systems
             NativeArray<GroundWater> groundWaterCells = m_GroundWaterSystem.GetData(false, out JobHandle dependencies).m_Buffer;
             JobHandle jobHandle = JobHandle.CombineDependencies(Dependency, dependencies);
 
-            AdjustGroundWaterJob adjustJob = new()
-            {
-                m_Buffer = groundWaterCells,
-                m_Flags = flags,
-            };
-            JobHandle adjustJobHandle = adjustJob.Schedule(groundWaterCells.Length, 64, jobHandle);
+            JobHandle adjustJobHandle = AdjustGroundWaterJob.Schedule(groundWaterCells, flags, 64, jobHandle);
             m_GroundWaterSystem.AddWriter(adjustJobHandle);
             Dependency = adjustJobHandle;
         }

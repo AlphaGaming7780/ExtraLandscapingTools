@@ -1,3 +1,4 @@
+using ExtraLandscapingTools.Systems.Jobs;
 using Game;
 using Game.Prefabs.Modes;
 using Game.Simulation;
@@ -5,7 +6,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 
-namespace ExtraLandscapingTools.Systems
+namespace ExtraLandscapingTools.Systems.Infinite
 {
     // Keeps the resources selected in the "Infinite Resources" settings group at 0 used, every
     // update. Disabled by default and turned on only while RegenMode is set to Infinite.
@@ -40,12 +41,7 @@ namespace ExtraLandscapingTools.Systems
             NativeArray<NaturalResourceCell> naturalResourceCells = m_NaturalResourceSystem.GetData(false, out JobHandle dependencies).m_Buffer;
             JobHandle jobHandle = JobHandle.CombineDependencies(Dependency, dependencies);
 
-            ClearUsedResourceJob clearUsedResourceJob = new()
-            {
-                m_Buffer = naturalResourceCells,
-                m_Flags = flags,
-            };
-            JobHandle clearJobHandle = clearUsedResourceJob.Schedule(naturalResourceCells.Length, 64, jobHandle);
+            JobHandle clearJobHandle = ClearUsedResourceJob.Schedule(naturalResourceCells, flags, 64, jobHandle);
             m_NaturalResourceSystem.AddWriter(clearJobHandle);
             Dependency = clearJobHandle;
         }

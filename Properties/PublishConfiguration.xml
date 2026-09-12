@@ -36,6 +36,7 @@ Choose how ore, oil, fertile land, fish and groundwater behave on your map: keep
 * **Yenyang** Thank you for all your help and knowledge on various game aspect AND PDX mods.
 * **T.D.W.** Thanks you for all the help with PDX mods.
 * **Kylte** Thank you for the fix for the Focus bug and its vanilla component resolver that help me lot to understand and make UI.
+* **[River-mochi](https://mods.paradoxplaza.com/authors/River-mochi)** Thank you for your help brainstorming and ideas for Infinite and Daily Regeneration.
 
 # Translation
 ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
@@ -73,7 +74,7 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extralandscapingtools.1647852/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.3.9" />
+	<ModVersion Value="1.4.0" /> <!--Already chaneged for new version-->
 	<!--Recommended version of the base game to use the mod-->
 	<GameVersion Value="1.5.*" />
 	<!--Dependency for the mod, can be set multiple times-->
@@ -84,6 +85,8 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 ### New Features
 - Added a resource regeneration mode setting: keep ore, oil, fertile land, fish and groundwater infinite, or have them regenerate gradually every in-game day.
 - Added groundwater support: refill and pollution clean-up.
+
+Thanks to [River-mochi](https://mods.paradoxplaza.com/authors/River-mochi) for brainstorming and ideas on the Infinite and Daily Regeneration modes!
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extralandscapingtools" />

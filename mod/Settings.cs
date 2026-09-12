@@ -1,17 +1,20 @@
+using ExtraLandscapingTools.Systems.Infinite;
 using ExtraLandscapingTools.Systems;
 using Game.Modding;
 using Game.Settings;
 
 namespace ExtraLandscapingTools
 {
-    [SettingsUIGroupOrder(kRegenModeGroup, kDailyRegenGroup, kInfiniteResourceGroup, kDepletedResourceGroup)]
-    [SettingsUIShowGroupName(kRegenModeGroup, kInfiniteResourceGroup, kDailyRegenGroup, kDepletedResourceGroup)]
+    [SettingsUIGroupOrder(kRegenModeGroup, kDailyRegenGroup, kInfiniteResourceGroup, kDepletedResourceGroup, kGroundWaterGroup, kGroundPollutionGroup)]
+    [SettingsUIShowGroupName(kRegenModeGroup, kInfiniteResourceGroup, kDailyRegenGroup, kDepletedResourceGroup, kGroundWaterGroup, kGroundPollutionGroup)]
     internal class ELTSettings : ModSetting
     {
         public ELTSettings(IMod mod) : base(mod) { }
 
         public const string kMainSection = "Main";
         public const string kDepletedResourceGroup = "DepletedResource";
+        public const string kGroundWaterGroup = "GroundWater";
+        public const string kGroundPollutionGroup = "GroundPollution";
         public const string kInfiniteResourceGroup = "InfiniteResource";
         public const string kDailyRegenGroup = "DailyRegen";
         public const string kRegenModeGroup = "RegenMode";
@@ -31,6 +34,7 @@ namespace ExtraLandscapingTools
                 m_RegenMode = value;
                 InfiniteResourceSystem.SetEnabled(value == RegenMode.Infinite);
                 InfiniteGroundWaterSystem.Refresh();
+                InfiniteGroundPollutionSystem.Refresh();
                 DailyRegenSystem.SetEnabled(value == RegenMode.DailyRegen);
             }
         }
@@ -71,6 +75,11 @@ namespace ExtraLandscapingTools
         [SettingsUISlider(min = 0f, max = 100f, step = 1f, unit = "percentage")]
         [SettingsUIHideByCondition(typeof(ELTSettings), nameof(IsNotDailyRegenMode))]
         public int GroundWaterPollutionReductionPercent { get; set; } = 0;
+
+        [SettingsUISection(kMainSection, kDailyRegenGroup)]
+        [SettingsUISlider(min = 0f, max = 100f, step = 1f, unit = "percentage")]
+        [SettingsUIHideByCondition(typeof(ELTSettings), nameof(IsNotDailyRegenMode))]
+        public int GroundPollutionReductionPercent { get; set; } = 0;
 
         #endregion
 
@@ -120,39 +129,65 @@ namespace ExtraLandscapingTools
             }
         }
 
+        private bool m_PreventGroundPollution = true;
+
+        [SettingsUISection(kMainSection, kInfiniteResourceGroup)]
+        [SettingsUIHideByCondition(typeof(ELTSettings), nameof(IsNotInfiniteMode))]
+        public bool PreventGroundPollution
+        {
+            get => m_PreventGroundPollution;
+            set
+            {
+                m_PreventGroundPollution = value;
+                InfiniteGroundPollutionSystem.Refresh();
+            }
+        }
+
         #endregion
 
         #region Clear Depleted Resource
 
         [SettingsUIButton]
         [SettingsUISection(kMainSection, kDepletedResourceGroup)]
+        [SettingsUIButtonGroup(kDepletedResourceGroup)]
         [SettingsUIDisableByCondition(typeof(ELTSettings), nameof(IsFertilityRefillDisabled))]
         public bool ClearDepletedFertilityResource { set { ClearDepletedSystem.RequestClearResource(ResourceFlags.Fertility); } }
 
         [SettingsUIButton]
         [SettingsUISection(kMainSection, kDepletedResourceGroup)]
+        [SettingsUIButtonGroup(kDepletedResourceGroup)]
         [SettingsUIDisableByCondition(typeof(ELTSettings), nameof(IsOreRefillDisabled))]
         public bool ClearDepletedOreResource { set { ClearDepletedSystem.RequestClearResource(ResourceFlags.Ore); } }
 
         [SettingsUIButton]
         [SettingsUISection(kMainSection, kDepletedResourceGroup)]
+        [SettingsUIButtonGroup(kDepletedResourceGroup)]
         [SettingsUIDisableByCondition(typeof(ELTSettings), nameof(IsOilRefillDisabled))]
         public bool ClearDepletedOilResource { set { ClearDepletedSystem.RequestClearResource(ResourceFlags.Oil); } }
 
         [SettingsUIButton]
         [SettingsUISection(kMainSection, kDepletedResourceGroup)]
+        [SettingsUIButtonGroup(kDepletedResourceGroup)]
         [SettingsUIDisableByCondition(typeof(ELTSettings), nameof(IsFishRefillDisabled))]
         public bool ClearDepletedFishResource { set { ClearDepletedSystem.RequestClearResource(ResourceFlags.Fish); } }
 
         [SettingsUIButton]
-        [SettingsUISection(kMainSection, kDepletedResourceGroup)]
+        [SettingsUISection(kMainSection, kGroundWaterGroup)]
+        [SettingsUIButtonGroup(kGroundWaterGroup)]
         [SettingsUIDisableByCondition(typeof(ELTSettings), nameof(IsGroundWaterRefillDisabled))]
         public bool ClearDepletedGroundWater { set { ClearDepletedSystem.RequestClearGroundWater(GroundWaterFlags.Amount); } }
 
         [SettingsUIButton]
-        [SettingsUISection(kMainSection, kDepletedResourceGroup)]
+        [SettingsUISection(kMainSection, kGroundWaterGroup)]
+        [SettingsUIButtonGroup(kGroundWaterGroup)]
         [SettingsUIDisableByCondition(typeof(ELTSettings), nameof(IsGroundWaterPollutionCleanDisabled))]
         public bool CleanGroundWaterPollution { set { ClearDepletedSystem.RequestClearGroundWater(GroundWaterFlags.Pollution); } }
+
+        [SettingsUIButton]
+        [SettingsUISection(kMainSection, kGroundPollutionGroup)]
+        [SettingsUIButtonGroup(kGroundPollutionGroup)]
+        [SettingsUIDisableByCondition(typeof(ELTSettings), nameof(IsGroundPollutionCleanDisabled))]
+        public bool CleanGroundPollution { set { ClearDepletedSystem.RequestCleanGroundPollution(); } }
 
         // Refilling is redundant while the resource is already kept infinite, either by this mod
         // (Infinite mode + per-resource toggle) or by the currently active gamemode's own resource
@@ -160,10 +195,11 @@ namespace ExtraLandscapingTools
         public bool IsFertilityRefillDisabled() => (RegenMode == RegenMode.Infinite && InfiniteFertilityResource) || InfiniteResourceSystem.IsGameModeResourceInfinite(ResourceFlags.Fertility);
         public bool IsOreRefillDisabled() => (RegenMode == RegenMode.Infinite && InfiniteOreResource) || InfiniteResourceSystem.IsGameModeResourceInfinite(ResourceFlags.Ore);
         public bool IsOilRefillDisabled() => (RegenMode == RegenMode.Infinite && InfiniteOilResource) || InfiniteResourceSystem.IsGameModeResourceInfinite(ResourceFlags.Oil);
-        // No gamemode equivalent exists for fish or groundwater.
+        // No gamemode equivalent exists for fish, groundwater, or ground pollution.
         public bool IsFishRefillDisabled() => RegenMode == RegenMode.Infinite && InfiniteFishResource;
         public bool IsGroundWaterRefillDisabled() => RegenMode == RegenMode.Infinite && InfiniteGroundWater;
         public bool IsGroundWaterPollutionCleanDisabled() => RegenMode == RegenMode.Infinite && PreventGroundWaterPollution;
+        public bool IsGroundPollutionCleanDisabled() => RegenMode == RegenMode.Infinite && PreventGroundPollution;
 
         #endregion
 
@@ -176,6 +212,7 @@ namespace ExtraLandscapingTools
             InfiniteFishResource = true;
             InfiniteGroundWater = true;
             PreventGroundWaterPollution = true;
+            PreventGroundPollution = true;
         }
     }
 }
