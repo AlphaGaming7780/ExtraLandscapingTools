@@ -17,8 +17,10 @@ You can now change the brush and rotate it.
 ### Ore, Oil, Underground water and fertile land tools
 You can now add resources to your map using this tool.
 ### Custom brush
-You can now add custom brushes to your game, check the wiki on the Github page of the mod.
+You can now add custom brushes to your game by dropping image files into `ModsData/ExtraLandscapingTools/CustomBrushes` in your Cities Skylines II data folder. Check the wiki on the Github page of the mod for more details.
 if you need help, ping me on discord @triton_supreme.
+### Resource regeneration
+Choose how ore, oil, fertile land, fish and groundwater behave on your map: keep them infinite, or make them regenerate gradually every in-game day, configurable per resource.
 
 ## Feature roadmap
 * ✔️ Refill used resources
@@ -26,6 +28,7 @@ if you need help, ping me on discord @triton_supreme.
 * ✔️ Brush angle
 * ✔️ Ore, Oil, Underground water and fertile land tools
 * ✔️ Brushes parameter
+* ✔️ Resource regeneration modes
 
 # Acknowledgment
 * **CityRat** Thank you for your help and this thumbnail.
@@ -36,18 +39,19 @@ if you need help, ping me on discord @triton_supreme.
 
 # Translation
 ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
-- ✔️French 100% : Morgan Touverey Quilling (mtouverey), spooky_off
-- ✔️Chinese Simplified 100% : RilkeXS(无手文) (RilkeXS), CBEdwin
-- ✔️Chinese Traditional 100% : 阿兩 (nova1529), copguhh139
-- ✔️German 100% : xinatoras (realneoncatgaming), Jakob (Hendrix_), Fuchs23
-- ⚠️Italian 81% : Piccolo_Opossum
-- ⚠️Japanese 81% : syuuga101
-- ✔️Korean 100% : Twotoolus-FLY-LShst, Hinanchovo, zuben00
-- ✔️Polish 100% : Lisek, karmel68
-- ✔️Portuguese 100% -> [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
-- ✔️Portuguese, Brazilian 100% : Miguel Pereira Campos (mpcamposz), solracletus
-- ⚠️Russian 81% : chromakeeeey, Mihail (kaktyc), Sergey Rogatnev (rogatnev.sergey), Richard "Katsumoto" (Katsumoto), Sergey (TraceXR)
-- ✔️Spanish 100% : elGendo87, Alex (AlexofCA)
+⚠️ This update added a lot of new text, so translation percentages dropped below - help translate on [Crowdin](https://crowdin.com/project/extralandscapingtools) if you can! ⚠️
+- ⚠️French 16% : Morgan Touverey Quilling (mtouverey), spooky_off
+- ⚠️Chinese Simplified 16% : RilkeXS(无手文) (RilkeXS), CBEdwin
+- ⚠️Chinese Traditional 16% : 阿兩 (nova1529), copguhh139
+- ⚠️German 16% : xinatoras (realneoncatgaming), Jakob (Hendrix_), Fuchs23
+- ⚠️Italian 13% : Piccolo_Opossum
+- ⚠️Japanese 13% : syuuga101
+- ⚠️Korean 16% : Twotoolus-FLY-LShst, Hinanchovo, zuben00
+- ⚠️Polish 16% : Lisek, karmel68
+- ⚠️Portuguese 16% -> [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
+- ⚠️Portuguese, Brazilian 16% : Miguel Pereira Campos (mpcamposz), solracletus
+- ⚠️Russian 13% : chromakeeeey, Mihail (kaktyc), Sergey Rogatnev (rogatnev.sergey), Richard "Katsumoto" (Katsumoto), Sergey (TraceXR)
+- ⚠️Spanish 16% : elGendo87, Alex (AlexofCA)
 
 # Community
 Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
@@ -56,6 +60,14 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<Thumbnail Value="Properties/ELT_Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
 	<Screenshot Value="Properties/ELT_LONG.png" />
+	<Screenshot Value="Properties/Images/Settings1.png" />
+	<Screenshot Value="Properties/Images/Infinite.png" />
+	<Screenshot Value="Properties/Images/DailyRegen.png" />
+	<Screenshot Value="Properties/Images/ResourceTools.png" />
+	<Screenshot Value="Properties/Images/BrushRotationUI.png" />
+	<Screenshot Value="Properties/Images/CustomBrushInGame.png" />
+	<Screenshot Value="Properties/Images/CustomBrushInGame2.png" />
+	<Screenshot Value="Properties/Images/CustomBrushFolder.png" />
 	<!--Tag, can be set multiple times-->
 	 <Tag Value="Code Mod" /> 
 	<!--Link to the forum post where the mod can be discussed-->
@@ -69,10 +81,9 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<!-- <ChangeLog Value="" /> -->
 	<ChangeLog>
-### Fixes
-- Fixed UI priority for the resources tools in the UI.
-- Removed the brush selector because the game has one.
-- Fixed the issue of rotated custom brushes.
+### New Features
+- Added a resource regeneration mode setting: keep ore, oil, fertile land, fish and groundwater infinite, or have them regenerate gradually every in-game day.
+- Added groundwater support: refill and pollution clean-up.
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extralandscapingtools" />

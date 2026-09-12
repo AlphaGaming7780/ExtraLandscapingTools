@@ -14,7 +14,7 @@
     "Options.GROUP[ExtraLandscapingTools.ExtraLandscapingTools.ELT.DepletedResource]": "Refill Depleted Resources",
 
     "Options.OPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.RegenMode]": "Regeneration mode",
-    "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.RegenMode]": "Choose how natural resources and groundwater recover on this map. Disabled: no help from this mod. Infinite: the resources checked below never deplete. Daily Regeneration: each resource refills every in-game day by the percentage set below (0 disables it for that resource).",
+    "Options.OPTION_DESCRIPTION[ExtraLandscapingTools.ExtraLandscapingTools.ELT.ELTSettings.RegenMode]": "Choose how natural resources and groundwater recover on this map. Disabled: no help from this mod. Daily Regeneration: each resource refills every in-game day by the percentage set below (0 disables it for that resource). Infinite: the resources checked below never deplete. Performance note: Infinite updates more often than Daily Regeneration (about 4x for resources, up to 16x for groundwater), so it has a slightly higher cost - both are lightweight, but Daily Regeneration is the cheaper option.",
 
     "Options.ExtraLandscapingTools.ExtraLandscapingTools.ELT.REGENMODE[Disabled]": "Disabled",
     "Options.ExtraLandscapingTools.ExtraLandscapingTools.ELT.REGENMODE[DailyRegen]": "Daily Regeneration",
