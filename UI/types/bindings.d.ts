@@ -699,6 +699,7 @@ declare module "cs2/bindings" {
   export interface ColorField extends Field<Color> {
   	hdr?: boolean;
   	showAlpha: boolean;
+  	locked?: boolean;
   }
   export interface DropdownField<T> extends Field<T>, WarningSign {
   	items: DropdownItem<T>[];
@@ -3088,6 +3089,20 @@ declare module "cs2/bindings" {
   function setContourMode(enabled: boolean): void;
   function setUndergroundMode(enabled: boolean): void;
   function setDistance(distance: number): void;
+  const parentMeshOverrideSupported$: ValueBinding<boolean>;
+  const objectOverrideSupported$: ValueBinding<boolean>;
+  const parentMeshOverrideEnabled$: ValueBinding<boolean>;
+  const parentMeshStagedValue$: ValueBinding<number>;
+  const groupIndexOverrideEnabled$: ValueBinding<boolean>;
+  const groupIndexStagedValue$: ValueBinding<number>;
+  const probabilityOverrideEnabled$: ValueBinding<boolean>;
+  const probabilityStagedValue$: ValueBinding<number>;
+  function setParentMeshOverrideEnabled(enabled: boolean): void;
+  function setParentMeshStagedValue(value: number): void;
+  function setGroupIndexOverrideEnabled(enabled: boolean): void;
+  function setGroupIndexStagedValue(value: number): void;
+  function setProbabilityOverrideEnabled(enabled: boolean): void;
+  function setProbabilityStagedValue(value: number): void;
   const BULLDOZE_TOOL = "Bulldoze Tool";
   const DEFAULT_TOOL = "Default Tool";
   const ZONE_TOOL = "Zone Tool";
@@ -3200,6 +3215,8 @@ declare module "cs2/bindings" {
   	Elderly = 8
   }
   const toolbarGroups$: ValueBinding<ToolbarGroup[]>;
+  const consoleToolbarGroups$: ValueBinding<ToolbarGroup[]>;
+  const bulldozeTool$: ValueBinding<ToolbarItem>;
   const assetCategories$: MapBinding<Entity, AssetCategory[]>;
   const assets$: MapBinding<Entity, Asset$1[]>;
   const themes$$1: ValueBinding<Theme$1[]>;
@@ -3587,10 +3604,10 @@ declare module "cs2/bindings" {
   	export { LightingState, SimulationDate, SimulationDateTime, SimulationTime, TimeSettings, calculateDateFromDays, calculateDateFromTicks, calculateDateTimeFromTicks, calculateMinutesSinceMidnightFromTicks, calculateTimeFromMinutesSinceMidnight, dateEquals, day$, lightingState$, setSimulationPaused, setSimulationSpeed, simulationPaused$, simulationPausedBarrier$, simulationSpeed$, ticks$, timeSettings$ };
   }
   export namespace tool {
-  	export { AREA_TOOL, BULLDOZE_TOOL, Brush, DEFAULT_TOOL, NET_TOOL, OBJECT_TOOL, ROUTE_TOOL, SELECTION_TOOL, TERRAIN_TOOL, Tool, ToolMode, UPGRADE_TOOL, WATER_TOOL, ZONE_TOOL, activeTool$, allSnapMask$, allowBrush$, availableSnapMask$, brushAngle$, brushHeight$, brushHeightMax$, brushHeightMin$, brushSize$, brushSizeMax$, brushSizeMin$, brushStrength$, brushes$, bulldozeConfirmationRequested$, changeElevation, color$, colorSupported$, confirmBulldoze, contourMode$, distance$, distanceScale$, elevation$, elevationDown, elevationDownDisabled$, elevationRange$, elevationScroll, elevationStep$, elevationUp, elevationUpDisabled$, isEditor$, parallelMode$, parallelModeSupported$, parallelOffset$, replacingTrees$, selectBrush, selectTool, selectToolMode, selectedBrush$, selectedSnapMask$, setBrushAngle, setBrushHeight, setBrushSize, setBrushStrength, setColor, setContourMode, setDistance, setElevationStep, setParallelOffset, setSelectedSnapMask, setShowWaterSourceNames, setSimulateBackdropWater, setUndergroundMode, setWaterSimSpeed, showWaterSourceNames$, simulateBackdropWater$, snapOptionNames$, toggleParallelMode, undergroundMode$, undergroundModeSupported$, waterSimSpeed$ };
+  	export { AREA_TOOL, BULLDOZE_TOOL, Brush, DEFAULT_TOOL, NET_TOOL, OBJECT_TOOL, ROUTE_TOOL, SELECTION_TOOL, TERRAIN_TOOL, Tool, ToolMode, UPGRADE_TOOL, WATER_TOOL, ZONE_TOOL, activeTool$, allSnapMask$, allowBrush$, availableSnapMask$, brushAngle$, brushHeight$, brushHeightMax$, brushHeightMin$, brushSize$, brushSizeMax$, brushSizeMin$, brushStrength$, brushes$, bulldozeConfirmationRequested$, changeElevation, color$, colorSupported$, confirmBulldoze, contourMode$, distance$, distanceScale$, elevation$, elevationDown, elevationDownDisabled$, elevationRange$, elevationScroll, elevationStep$, elevationUp, elevationUpDisabled$, groupIndexOverrideEnabled$, groupIndexStagedValue$, isEditor$, objectOverrideSupported$, parallelMode$, parallelModeSupported$, parallelOffset$, parentMeshOverrideEnabled$, parentMeshOverrideSupported$, parentMeshStagedValue$, probabilityOverrideEnabled$, probabilityStagedValue$, replacingTrees$, selectBrush, selectTool, selectToolMode, selectedBrush$, selectedSnapMask$, setBrushAngle, setBrushHeight, setBrushSize, setBrushStrength, setColor, setContourMode, setDistance, setElevationStep, setGroupIndexOverrideEnabled, setGroupIndexStagedValue, setParallelOffset, setParentMeshOverrideEnabled, setParentMeshStagedValue, setProbabilityOverrideEnabled, setProbabilityStagedValue, setSelectedSnapMask, setShowWaterSourceNames, setSimulateBackdropWater, setUndergroundMode, setWaterSimSpeed, showWaterSourceNames$, simulateBackdropWater$, snapOptionNames$, toggleParallelMode, undergroundMode$, undergroundModeSupported$, waterSimSpeed$ };
   }
   export namespace toolbar$1 {
-  	export { AgeMask, Asset$1 as Asset, AssetCategory, AssetPack, CompareAssetsByPriority, Theme$1 as Theme, ToolbarGroup, ToolbarItem, ToolbarItemType, ageMask$, assetCategories$, assetPacks$, assets$, clearAssetSelection, decorationMode$, hasModAssets$, modsSelected$, selectAsset, selectAssetCategory, selectAssetMenu, selectedAsset$, selectedAssetCategory$, selectedAssetMenu$, selectedAssetPacks$, selectedThemes$, setAgeMask, setDecorationMode, setModsSelected, setSelectedAssetPacks, setSelectedThemes, setVanillaSelected, themes$$1 as themes$, toggleToolOptions, toolbarGroups$, vanillaSelected$, vegetationAges$ };
+  	export { AgeMask, Asset$1 as Asset, AssetCategory, AssetPack, CompareAssetsByPriority, Theme$1 as Theme, ToolbarGroup, ToolbarItem, ToolbarItemType, ageMask$, assetCategories$, assetPacks$, assets$, bulldozeTool$, clearAssetSelection, consoleToolbarGroups$, decorationMode$, hasModAssets$, modsSelected$, selectAsset, selectAssetCategory, selectAssetMenu, selectedAsset$, selectedAssetCategory$, selectedAssetMenu$, selectedAssetPacks$, selectedThemes$, setAgeMask, setDecorationMode, setModsSelected, setSelectedAssetPacks, setSelectedThemes, setVanillaSelected, themes$$1 as themes$, toggleToolOptions, toolbarGroups$, vanillaSelected$, vegetationAges$ };
   }
   export namespace toolbarBottom {
   	export { cityName$, money$, moneyDelta$, moneyTrendThresholds$, population$$1 as population$, populationDelta$, populationTrendThresholds$, setCityName, unlimitedMoney$ };
