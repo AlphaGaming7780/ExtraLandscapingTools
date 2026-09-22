@@ -5,3 +5,4 @@ ts-build/
 .vs/
 text.txt
 /Library
+.env.txt
