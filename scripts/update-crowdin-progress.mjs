@@ -1,10 +1,29 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { join } from "node:path";
 
 const PROJECT_ID = process.env.CROWDIN_PROJECT_ID;
 const TOKEN = process.env.CROWDIN_PERSONAL_TOKEN;
-const FILE_PATH = "Properties/PublishConfiguration.xml";
-const CHANGELOG_CLOSE_TAG = "  </ChangeLog>";
+const SKIP_DIRS = new Set(["node_modules", ".git", ".vs", "bin", "obj"]);
 const BULLET_RE = /^(-\s(?:⚠️|✔️|❌))([^0-9%>]+?)(\d+)%(.*)$/;
+// Indent varies per file (tab here, 2 spaces elsewhere) - matched instead of hardcoded so a reformatted file doesn't silently break the insertion.
+const CHANGELOG_CLOSE_RE = /^([ \t]*)<\/ChangeLog>$/m;
+const LOCALISATION_HEADING_RE = /^### Localisation\s*$/m;
+const HEADING_RE = /^###\s/;
+
+// Walks from cwd looking for Properties/PublishConfiguration.xml, wherever it lives (repo root, src/, ...).
+function findPublishConfig(dir) {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      if (SKIP_DIRS.has(entry.name)) continue;
+      const found = findPublishConfig(full);
+      if (found) return found;
+    } else if (entry.isFile() && entry.name === "PublishConfiguration.xml") {
+      return full;
+    }
+  }
+  return null;
+}
 
 function iconFor(percent) {
   if (percent >= 100) return "✔️";
@@ -48,13 +67,50 @@ function updateLines(content, progress) {
   return { content: lines.join("\n"), changes };
 }
 
+const buildBulletLine = (change) => `* ${change.name} : ${change.oldPercent}% → ${change.newPercent}%`;
+
+// Updates bullets already in the section by language name (in place) instead of duplicating them; anything else in
+// the section (manual notes, credit-only bullets for a language with no % change this run) is left untouched.
+function mergeLocalisationSection(sectionLines, changes) {
+  const remaining = new Map(changes.map((c) => [c.name, c]));
+  const updatedLines = sectionLines.map((line) => {
+    const m = line.match(/^\*\s*([^:]+?)\s*:/);
+    if (!m) return line;
+    const change = remaining.get(m[1].trim());
+    if (!change) return line;
+    remaining.delete(m[1].trim());
+    return buildBulletLine(change);
+  });
+  for (const change of remaining.values()) updatedLines.push(buildBulletLine(change));
+  return updatedLines;
+}
+
 function appendChangelogSection(content, changes) {
   if (changes.length === 0) return content;
-  const bullets = changes
-    .map((c) => `* ${c.name} : ${c.oldPercent}% → ${c.newPercent}%`)
-    .join("\n");
-  const section = `\n### Localisation\n${bullets}\n`;
-  return content.replace(CHANGELOG_CLOSE_TAG, `${section}${CHANGELOG_CLOSE_TAG}`);
+
+  const closeMatch = content.match(CHANGELOG_CLOSE_RE);
+  if (!closeMatch) return content;
+
+  const headingMatch = content.match(LOCALISATION_HEADING_RE);
+  if (!headingMatch) {
+    const bullets = changes.map(buildBulletLine).join("\n");
+    const section = `\n### Localisation\n${bullets}\n`;
+    return content.replace(closeMatch[0], `${section}${closeMatch[0]}`);
+  }
+
+  // A "### Localisation" section already exists (from an earlier run) - update it in place instead of adding a duplicate heading.
+  const lines = content.split("\n");
+  const headingIndex = lines.findIndex((line) => LOCALISATION_HEADING_RE.test(line));
+  let endIndex = lines.length;
+  for (let i = headingIndex + 1; i < lines.length; i++) {
+    if (HEADING_RE.test(lines[i]) || CHANGELOG_CLOSE_RE.test(lines[i])) {
+      endIndex = i;
+      break;
+    }
+  }
+  const sectionLines = lines.slice(headingIndex + 1, endIndex);
+  lines.splice(headingIndex + 1, sectionLines.length, ...mergeLocalisationSection(sectionLines, changes));
+  return lines.join("\n");
 }
 
 if (!PROJECT_ID || !TOKEN) {
@@ -62,9 +118,21 @@ if (!PROJECT_ID || !TOKEN) {
   process.exit(1);
 }
 
-const raw = readFileSync(FILE_PATH, "utf8");
+const filePath = findPublishConfig(process.cwd());
+if (!filePath) {
+  console.error("Could not find a PublishConfiguration.xml under the working directory.");
+  process.exit(1);
+}
+console.log(`Using ${filePath}`);
+
+const raw = readFileSync(filePath, "utf8");
+// Normalize to LF for matching/editing (CRLF leaves a trailing \r that breaks the line-anchored regexes above),
+// then restore the file's original line ending on write.
+const usesCRLF = raw.includes("\r\n");
+const normalized = raw.replace(/\r\n/g, "\n");
+
 const progress = await fetchProgress();
-const { content: withProgress, changes } = updateLines(raw, progress);
+const { content: withProgress, changes } = updateLines(normalized, progress);
 
 if (changes.length === 0) {
   console.log("No translation progress changes.");
@@ -72,7 +140,7 @@ if (changes.length === 0) {
 }
 
 const final = appendChangelogSection(withProgress, changes);
-writeFileSync(FILE_PATH, final);
+writeFileSync(filePath, usesCRLF ? final.replace(/\n/g, "\r\n") : final);
 
 console.log(`Updated ${changes.length} language(s):`);
 for (const c of changes) {
