@@ -3,20 +3,27 @@ name: Update translation progress
 on:
   pull_request:
     types: [opened, synchronize]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to run against (manual test run)"
+        required: true
+        default: "main"
 
 permissions:
   contents: write
 
 jobs:
   update-progress:
-    # Only run on the PR opened by Crowdin's GitHub integration
-    if: startsWith(github.event.pull_request.title, 'New Crowdin updates')
+    # Only gate by PR title on the pull_request trigger - a manual workflow_dispatch run always proceeds (used to
+    # verify Actions can run on this repo at all, independent of the pull_request event).
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.pull_request.title, 'New Crowdin updates')
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout PR branch
+      - name: Checkout branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.branch || github.event.pull_request.head.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -37,6 +44,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Update translation progress from Crowdin"
+            git commit -F /tmp/crowdin-commit-message.txt
             git push
           fi

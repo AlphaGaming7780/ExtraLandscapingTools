@@ -1,5 +1,8 @@
 import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
+import { tmpdir } from "node:os";
+
+const COMMIT_MESSAGE_PATH = join(tmpdir(), "crowdin-commit-message.txt");
 
 const PROJECT_ID = process.env.CROWDIN_PROJECT_ID;
 const TOKEN = process.env.CROWDIN_PERSONAL_TOKEN;
@@ -68,6 +71,23 @@ function updateLines(content, progress) {
 }
 
 const buildBulletLine = (change) => `* ${change.name} : ${change.oldPercent}% → ${change.newPercent}%`;
+
+// Split changes into languages that were already in progress vs. ones just starting, so the commit body
+// reads as "here's what moved forward" vs. "here's what's new" instead of one flat list.
+function buildCommitMessage(changes) {
+  const updated = changes.filter((c) => c.oldPercent > 0);
+  const started = changes.filter((c) => c.oldPercent === 0);
+
+  const sections = [];
+  if (updated.length > 0) {
+    sections.push(["Current", updated.map(buildBulletLine).join("\n")].join("\n"));
+  }
+  if (started.length > 0) {
+    sections.push(["New", started.map(buildBulletLine).join("\n")].join("\n"));
+  }
+
+  return ["Update translation progress from Crowdin", "", sections.join("\n\n")].join("\n");
+}
 
 // Updates bullets already in the section by language name (in place) instead of duplicating them; anything else in
 // the section (manual notes, credit-only bullets for a language with no % change this run) is left untouched.
@@ -141,6 +161,7 @@ if (changes.length === 0) {
 
 const final = appendChangelogSection(withProgress, changes);
 writeFileSync(filePath, usesCRLF ? final.replace(/\n/g, "\r\n") : final);
+writeFileSync(COMMIT_MESSAGE_PATH, buildCommitMessage(changes));
 
 console.log(`Updated ${changes.length} language(s):`);
 for (const c of changes) {
