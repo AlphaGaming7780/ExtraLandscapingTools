@@ -35,24 +35,24 @@ Choose how ore, oil, fertile land, fish and groundwater behave on your map: keep
 * **optimus-code** Thanks for your knowledge and you help on various stuff in this mod.
 * **Yenyang** Thank you for all your help and knowledge on various game aspect AND PDX mods.
 * **T.D.W.** Thanks you for all the help with PDX mods.
-* **Kylte** Thank you for the fix for the Focus bug and its vanilla component resolver that help me lot to understand and make UI.
+* **klyte45** Thank you for the fix for the Focus bug and its vanilla component resolver that help me lot to understand and make UI.
 * **[River-mochi](https://mods.paradoxplaza.com/authors/River-mochi)** Thank you for your help brainstorming and ideas for Infinite and Daily Regeneration.
 
 # Translation
 ⚠️ This mod uses crowdin so there maybe inconsistencies with translations due to translations from different translators ⚠️
 ⚠️ This update added a lot of new text, so translation percentages dropped below - help translate on [Crowdin](https://crowdin.com/project/extralandscapingtools) if you can! ⚠️
-- ⚠️French 16% : Morgan Touverey Quilling (mtouverey), spooky_off
-- ⚠️Chinese Simplified 16% : RilkeXS(无手文) (RilkeXS), CBEdwin
-- ⚠️Chinese Traditional 16% : 阿兩 (nova1529), copguhh139
-- ⚠️German 16% : xinatoras (realneoncatgaming), Jakob (Hendrix_), Fuchs23
-- ⚠️Italian 13% : Piccolo_Opossum
-- ⚠️Japanese 13% : syuuga101
-- ⚠️Korean 16% : Twotoolus-FLY-LShst, Hinanchovo, zuben00
-- ⚠️Polish 16% : Lisek, karmel68
-- ⚠️Portuguese 16% -> [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
-- ⚠️Portuguese, Brazilian 16% : Miguel Pereira Campos (mpcamposz), solracletus
-- ⚠️Russian 13% : chromakeeeey, Mihail (kaktyc), Sergey Rogatnev (rogatnev.sergey), Richard "Katsumoto" (Katsumoto), Sergey (TraceXR)
-- ⚠️Spanish 16% : elGendo87, Alex (AlexofCA)
+- ✔️French 100% : Morgan Touverey Quilling (mtouverey), spooky_off
+- ⚠️Chinese Simplified 9% : RilkeXS(无手文) (RilkeXS), CBEdwin
+- ⚠️Chinese Traditional 9% : 阿兩 (nova1529), copguhh139
+- ⚠️German 9% : xinatoras (realneoncatgaming), Jakob (Hendrix_), Fuchs23
+- ⚠️Italian 8% : Piccolo_Opossum
+- ⚠️Japanese 8% : syuuga101
+- ✔️Korean 100% : Twotoolus-FLY-LShst, Hinanchovo, zuben00
+- ⚠️Polish 9% : Lisek, karmel68
+- ⚠️Portuguese 9% -> [European Portuguese Localization mod](https://mods.paradoxplaza.com/mods/92599/Windows)
+- ⚠️Portuguese, Brazilian 9% : Miguel Pereira Campos (mpcamposz), solracletus
+- ⚠️Russian 8% : chromakeeeey, Mihail (kaktyc), Sergey Rogatnev (rogatnev.sergey), Richard "Katsumoto" (Katsumoto), Sergey (TraceXR)
+- ✔️Spanish 100% : elGendo87, Alex (AlexofCA)
 
 # Community
 Looking to discuss Cities: Skylines 2 Unofficial modding together with other modders? You're welcome to join or the [Cities: Skylines Modding Discord](https://discord.gg/27CVdGFA47).
@@ -60,7 +60,6 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<!--Thumbnail-->
 	<Thumbnail Value="Properties/ELT_Thumbnail.png" />
 	<!--Screenshot, can be set multiple times-->
-	<Screenshot Value="Properties/ELT_LONG.png" />
 	<Screenshot Value="Properties/Images/Settings1.png" />
 	<Screenshot Value="Properties/Images/Infinite.png" />
 	<Screenshot Value="Properties/Images/DailyRegen.png" />
@@ -69,14 +68,15 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 	<Screenshot Value="Properties/Images/CustomBrushInGame.png" />
 	<Screenshot Value="Properties/Images/CustomBrushInGame2.png" />
 	<Screenshot Value="Properties/Images/CustomBrushFolder.png" />
+	<Screenshot Value="Properties/ELT_LONG.png" />
 	<!--Tag, can be set multiple times-->
 	 <Tag Value="Code Mod" /> 
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/extralandscapingtools.1647852/" />
 	<!--Version of the mod-->
-	<ModVersion Value="1.4.0" /> <!--Already chaneged for new version-->
+	<ModVersion Value="1.4.0" />
 	<!--Recommended version of the base game to use the mod-->
-	<GameVersion Value="1.5.*" />
+	<GameVersion Value="1.6.*" />
 	<!--Dependency for the mod, can be set multiple times-->
 	<Dependency Id="75724" />
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
@@ -87,6 +87,10 @@ Looking to discuss Cities: Skylines 2 Unofficial modding together with other mod
 - Added groundwater support: refill and pollution clean-up.
 
 Thanks to [River-mochi](https://mods.paradoxplaza.com/authors/River-mochi) for brainstorming and ideas on the Infinite and Daily Regeneration modes!
+
+### Localisation
+* Korean : Hinanchovo
+* Spanish : elGendo87
   </ChangeLog>
 	<!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/extralandscapingtools" />
