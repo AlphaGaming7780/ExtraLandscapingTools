@@ -2,7 +2,7 @@ name: Update translation progress
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [closed]
   workflow_dispatch:
     inputs:
       branch:
@@ -15,15 +15,15 @@ permissions:
 
 jobs:
   update-progress:
-    # Only gate by PR title on the pull_request trigger - a manual workflow_dispatch run always proceeds (used to
-    # verify Actions can run on this repo at all, independent of the pull_request event).
-    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.pull_request.title, 'New Crowdin updates')
+    # Only run for an actually-merged Crowdin PR - "closed" also fires when a PR is closed without merging,
+    # and we don't want to run on every pull_request event, just the merge into main.
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.merged == true && startsWith(github.event.pull_request.title, 'New Crowdin updates'))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.branch || github.event.pull_request.head.ref }}
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.branch || github.event.pull_request.base.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
